@@ -31,7 +31,7 @@ commands:
           name: Run LCOV
           command: |
             lcov --capture --directory ./build-tests/ --output-file ./build-tests/coverage.info
-            lcov -r "./build-tests/coverage.info" "*.moc" "*moc_*.cpp" "*/test/*" "*/unit_tests/*" "*/gtest/*" "*/c++/*" "*/Core/*" "*/Eigen/*" "*/gcc/*" -o "./build-tests/coverage-filtered.info"
+            lcov -r "./build-tests/coverage.info" "*.moc" "*moc_*.cpp" "*/test/*" "*/unit_tests/*" "*/gtest/*" "*/c++/*" "*/Eigen/*" "*/gcc/*" -o "./build-tests/coverage-filtered.info"
             genhtml ./build-tests/coverage-filtered.info --output-directory coverage
       - store_artifacts:
           path: coverage
