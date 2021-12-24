@@ -1,6 +1,7 @@
 #pragma once
 
 #include "algorithms.h"
+#include "timestep.h"
 
 namespace chem {
 using namespace Eigen;
@@ -18,5 +19,6 @@ class Solver {
     VectorXd rate_constants_;
     MatrixXd reaction_powers_;
     MatrixXd stochiometric_matrix_;
+    TimeStep time_step_;
 };
 }  // namespace chem
