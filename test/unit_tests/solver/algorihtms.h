@@ -74,4 +74,26 @@ TEST(algorithms, calc_reaction_rates) {
     ASSERT_THROW(algorithms::calc_reaction_rates(rate_constants_new, concentrations, reaction_powers), Exception);
 }
 
+TEST(algorithms, calc_time_step) {
+    const double factor(0.1);
+    Eigen::VectorXd concentration(3);
+    Eigen::VectorXd dX_dt(4);
+
+    ASSERT_THROW(algorithms::calc_time_step(concentration, dX_dt, factor), Exception);
+
+    dX_dt = Eigen::VectorXd(3);
+
+    concentration(0) = 1.0;
+    concentration(1) = 2.0;
+    concentration(2) = 3.0;
+
+    dX_dt(0) = 4.0;
+    dX_dt(1) = 5.0;
+    dX_dt(2) = 6.0;
+
+    const double result(algorithms::calc_time_step(concentration, dX_dt, factor));
+
+    ASSERT_DOUBLE_EQ(0.1 * 0.25, result);
+}
+
 }  // namespace chem

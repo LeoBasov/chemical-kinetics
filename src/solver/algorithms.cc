@@ -24,5 +24,23 @@ VectorXd calc_reaction_rates(const VectorXd& rate_constants, const VectorXd& con
     return reaction_rates;
 }
 
+double calc_time_step(const VectorXd& concentrations, const VectorXd& dX_dt, const double& factor) {
+    double value = std::numeric_limits<double>::max();
+
+    if (concentrations.size() != dX_dt.size()) {
+        throw Exception("arrays of incompatible size", __PRETTY_FUNCTION__);
+    }
+
+    for (long i = 0; i < concentrations.size(); i++) {
+        const double new_val(std::abs(concentrations(i) / dX_dt(i)));
+
+        if (new_val < value) {
+            value = new_val;
+        }
+    }
+
+    return factor * value;
+}
+
 }  // namespace algorithms
 }  // namespace chem
