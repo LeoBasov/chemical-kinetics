@@ -24,7 +24,7 @@ commands:
     steps:
       - run:
           name: Run unit tests
-          command: mkdir test-results && mkdir test-results/gtest && ./build-tests/unit_tests/unit_tests --gtest_output="xml:./test-results/gtest/results.xml"
+          command: mkdir test-results && mkdir test-results/gtest && ./build-tests/unit_tests --gtest_output="xml:./test-results/gtest/results.xml"
       - store_test_results:
           path: test-results
       - run:
