@@ -68,6 +68,10 @@ TEST(algorithms, calc_reaction_rates) {
     ASSERT_DOUBLE_EQ(ref_1, reaction_rates(0));
     ASSERT_DOUBLE_EQ(ref_2, reaction_rates(1));
     ASSERT_DOUBLE_EQ(ref_3, reaction_rates(2));
+
+    Eigen::VectorXd rate_constants_new(n_species);
+
+    ASSERT_THROW(algorithms::calc_reaction_rates(rate_constants_new, concentrations, reaction_powers), Exception);
 }
 
 }  // namespace chem

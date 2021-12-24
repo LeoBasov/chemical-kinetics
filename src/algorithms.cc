@@ -12,8 +12,7 @@ VectorXd calc_reaction_rates(const VectorXd& rate_constants, const VectorXd& con
     VectorXd reaction_rates(rate_constants);
 
     if (reaction_rates.size() * concentrations.size() != reaction_powers.size()) {
-        throw Exception("arrays of incompatible size " + std::to_string(reaction_rates.size() * concentrations.size()),
-                        __PRETTY_FUNCTION__);
+        throw Exception("arrays of incompatible size", __PRETTY_FUNCTION__);
     }
 
     for (long j = 0; j < reaction_rates.size(); j++) {
