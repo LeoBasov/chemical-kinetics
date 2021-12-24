@@ -12,7 +12,7 @@ commands:
           command: apt update && sudo apt install -y lcov
       - run:
           name: Run SETUP
-          command: ./setup.sh -gtest
+          command: bash setup.sh -gtest
 
 executors:
   docker-bionic:
