@@ -7,9 +7,9 @@
 namespace hamt {
 namespace gmsh {
 
-TEST(dummy, foo) {}
+TEST(dummy, foo) { ASSERT_EQ(0, foo()); }
 
-TEST(dummy, ba) {}
+TEST(dummy, ba) { ASSERT_EQ(12.1, ba()); }
 
 }  // namespace gmsh
 }  // namespace hamt
