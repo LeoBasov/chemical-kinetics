@@ -13,6 +13,28 @@ commands:
       - run:
           name: Run SETUP
           command: bash setup.sh -gtest
+          
+  build_tests:
+    steps:
+      - run:
+          name: Build Tests
+          command: 'mkdir build-tests && cd build-tests && cmake -DCMAKE_BUILD_TYPE=Release ../test/unit_tests/ && make'
+          
+  run_unit_tests:
+    steps:
+      - run:
+          name: Run unit tests
+          command: mkdir test-results && mkdir test-results/gtest && ./build-tests/unit_tests --gtest_output="xml:./test-results/gtest/results.xml"
+      - store_test_results:
+          path: test-results
+      - run:
+          name: Run LCOV
+          command: |
+            lcov --capture --directory ./build-tests/ --output-file ./build-tests/coverage.info
+            lcov -r "./build-tests/coverage.info" "*.moc" "*moc_*.cpp" "*/test/*" "*/unit_tests/*" "*/gtest/*" "*/c++/*" "*/Eigen/*" "*/gcc/*" -o "./build-tests/coverage-filtered.info"
+            genhtml ./build-tests/coverage-filtered.info --output-directory coverage
+      - store_artifacts:
+          path: coverage
 
 executors:
   docker-bionic:
@@ -24,6 +46,8 @@ jobs:
     executor: docker-bionic
     steps:
       - set_up_unit_test_environment
+      - build_tests
+      - run_unit_tests
 
 workflows:
   build-and-run-tests:
