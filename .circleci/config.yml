@@ -18,7 +18,7 @@ commands:
     steps:
       - run:
           name: Build HAMT-TESTS
-          command: 'mkdir build-hamt-tests && cd build-hamt-tests && cmake -DCMAKE_BUILD_TYPE=Release ../test/ && make'
+          command: 'mkdir build-hamt-tests && cd build-hamt-tests && cmake -DCMAKE_BUILD_TYPE=Release ../test/unit_tests/ && make'
 
 executors:
   docker-bionic:
@@ -30,6 +30,7 @@ jobs:
     executor: docker-bionic
     steps:
       - set_up_unit_test_environment
+      - build_tests
 
 workflows:
   build-and-run-tests:
