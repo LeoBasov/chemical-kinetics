@@ -17,7 +17,7 @@ commands:
   build_tests:
     steps:
       - run:
-          name: Build HAMT-TESTS
+          name: Build Tests
           command: 'mkdir build-tests && cd build-tests && cmake -DCMAKE_BUILD_TYPE=Release ../test/unit_tests/ && make'
           
   run_unit_tests:
