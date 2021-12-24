@@ -5,8 +5,8 @@
 #include <iostream>
 #include <vector>
 
-#include "constants.h"
-#include "exception/exception.h"
+#include "../constants.h"
+#include "../exception/exception.h"
 
 namespace chem {
 namespace algorithms {
