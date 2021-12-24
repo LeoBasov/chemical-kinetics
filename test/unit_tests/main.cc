@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "dummy.h"
+#include "algorihtms.h"
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
