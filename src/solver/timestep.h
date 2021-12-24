@@ -2,6 +2,8 @@
 
 #include <Eigen/Dense>
 
+#include "algorithms.h"
+
 namespace chem {
 using namespace Eigen;
 
