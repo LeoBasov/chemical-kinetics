@@ -10,6 +10,9 @@ commands:
       - run:
           name: Install LCOV
           command: apt update && sudo apt install -y lcov
+      - run:
+          name: Run SETUP
+          command: ./setup.sh -gtest
 
 executors:
   docker-bionic:
