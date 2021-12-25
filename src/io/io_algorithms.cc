@@ -54,7 +54,7 @@ std::vector<Reaction> add_reactions(const std::string& file_name, const std::vec
             Reaction reaction(species_names.size());
 
             add_products(results, reaction, species_names);
-            // TODO: add read educts
+            add_educts(results, reaction, species_names);
             // TODO: add read reate constant
             // TODO: add read reaction enthalpy
 
@@ -89,6 +89,34 @@ void add_products(const std::vector<std::string>& line, Reaction& reaction,
                 } else {
                     reaction.product_stoichiometric_coefficients.at(iter - species_names.begin()) =
                         std::stod(product.at(0));
+                }
+            }
+        }
+    }
+}
+
+void add_educts(const std::vector<std::string>& line, Reaction& reaction,
+                const std::vector<std::string>& species_names) {
+    for (size_t i = 0; i < line.size(); i++) {
+        if (line.at(i) == "educts") {
+            const unsigned int n_educts(std::stoi(line.at(i + 1)));
+
+            for (size_t p = 2; p < n_educts + 2; p++) {
+                std::vector<std::string> educt(split_string(line.at(i + p), "*"));
+                std::vector<std::string> power(split_string(educt.at(1), "^"));
+
+                if (educt.size() != 2 || power.size() != 2) {
+                    throw Exception("wrong educt format", __PRETTY_FUNCTION__);
+                }
+
+                auto iter = std::find(species_names.begin(), species_names.end(), power.at(0));
+
+                if (iter == species_names.end()) {
+                    throw Exception("species not defined", __PRETTY_FUNCTION__);
+                } else {
+                    reaction.educt_stoichiometric_coefficients.at(iter - species_names.begin()) =
+                        std::stod(educt.at(0));
+                    reaction.reaction_powers.at(iter - species_names.begin()) = std::stod(power.at(1));
                 }
             }
         }
