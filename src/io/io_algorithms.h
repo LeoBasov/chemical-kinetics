@@ -36,6 +36,7 @@ Species add_species(const std::string& file_name);
 std::vector<Reaction> add_reactions(const std::string& file_name, const std::vector<std::string>& species_names);
 void add_products(const std::vector<std::string>& line, Reaction& reaction,
                   const std::vector<std::string>& species_names);
+std::vector<std::string> split_string(std::string str, const std::string& delimiter);
 
 }  // namespace io_algorithms
 }  // namespace chem

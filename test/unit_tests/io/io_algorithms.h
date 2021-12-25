@@ -63,6 +63,25 @@ TEST(io_algorithms, add_reaction) {
     std::vector<Reaction> reactions = add_reactions(file_name, species.names);
 
     ASSERT_EQ(2, reactions.size());
+
+    // reaction 1
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(0).product_stoichiometric_coefficients.at(0));
+    ASSERT_DOUBLE_EQ(1.0, reactions.at(0).product_stoichiometric_coefficients.at(1));
+    ASSERT_DOUBLE_EQ(0.5, reactions.at(0).product_stoichiometric_coefficients.at(2));
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(0).product_stoichiometric_coefficients.at(3));
+
+    ASSERT_DOUBLE_EQ(1.0, reactions.at(0).educt_stoichiometric_coefficients.at(0));
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(0).educt_stoichiometric_coefficients.at(1));
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(0).educt_stoichiometric_coefficients.at(2));
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(0).educt_stoichiometric_coefficients.at(3));
+
+    ASSERT_DOUBLE_EQ(1.0, reactions.at(0).reaction_powers.at(0));
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(0).reaction_powers.at(1));
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(0).reaction_powers.at(2));
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(0).reaction_powers.at(3));
+
+    // check rate constant
+    // check reaction enthalpy
 }
 
 }  // namespace chem

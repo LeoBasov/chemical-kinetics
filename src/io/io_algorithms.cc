@@ -76,10 +76,39 @@ void add_products(const std::vector<std::string>& line, Reaction& reaction,
             const unsigned int n_products(std::stoi(line.at(i + 1)));
 
             for (size_t p = 2; p < n_products + 2; p++) {
-                // TODO: add splitting and reading
+                std::vector<std::string> product(split_string(line.at(i + p), "*"));
+
+                if (product.size() != 2) {
+                    throw Exception("wrong product format", __PRETTY_FUNCTION__);
+                }
+
+                auto iter = std::find(species_names.begin(), species_names.end(), product.at(1));
+
+                if (iter == species_names.end()) {
+                    throw Exception("species not defined", __PRETTY_FUNCTION__);
+                } else {
+                    reaction.product_stoichiometric_coefficients.at(iter - species_names.begin()) =
+                        std::stod(product.at(0));
+                }
             }
         }
     }
+}
+
+std::vector<std::string> split_string(std::string str, const std::string& delimiter) {
+    std::vector<std::string> split;
+
+    size_t pos = 0;
+    std::string token;
+    while ((pos = str.find(delimiter)) != std::string::npos) {
+        token = str.substr(0, pos);
+        split.push_back(token);
+        str.erase(0, pos + delimiter.length());
+    }
+
+    split.push_back(str);
+
+    return split;
 }
 
 }  // namespace io_algorithms
