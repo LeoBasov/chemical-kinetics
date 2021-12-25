@@ -36,5 +36,51 @@ Species add_species(const std::string &file_name) {
     return species;
 }
 
+std::vector<Reaction> add_reactions(const std::string& file_name, const std::vector<std::string>& species_names) {
+    std::vector<Reaction> reactions;
+    std::ifstream infile(file_name);
+    std::string line;
+
+    if (!infile.is_open()) {
+        throw Exception("file does not exist", __PRETTY_FUNCTION__);
+    }
+
+    while (std::getline(infile, line)) {
+        std::istringstream iss(line);
+        std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
+                                         std::istream_iterator<std::string>());
+
+        if (results.size() && results.front() == "add_reaction") {
+            Reaction reaction(species_names.size());
+
+            add_products(results, reaction, species_names);
+            // TODO: add read educts
+            // TODO: add read reate constant
+            // TODO: add read reaction enthalpy
+
+            reactions.push_back(reaction);
+        }
+    }
+
+    if (!reactions.size()) {
+        throw Exception("no reactions added", __PRETTY_FUNCTION__);
+    }
+
+    return reactions;
+}
+
+void add_products(const std::vector<std::string>& line, Reaction& reaction,
+                  const std::vector<std::string>& species_names) {
+    for (size_t i = 0; i < line.size(); i++) {
+        if (line.at(i) == "products") {
+            const unsigned int n_products(std::stoi(line.at(i + 1)));
+
+            for (size_t p = 2; p < n_products + 2; p++) {
+                // TODO: add splitting and reading
+            }
+        }
+    }
+}
+
 }  // namespace io_algorithms
 }  // namespace chem

@@ -40,8 +40,29 @@ TEST(io_algorithms, add_species) {
     ASSERT_DOUBLE_EQ(0.3, species.concentrations.at(3));
 }
 
-TEST(io_algorithms, add_reaction_wrong) {}
+TEST(io_algorithms, add_reaction_wrong) {
+    const std::string file_name_wrong_1("./test/unit_tests/test_data/add_reaction/add_reactions_wrong_1.in");
+    const std::string file_name_wrong_2("./test/unit_tests/test_data/add_reaction/add_reactions_wrong_2.in");
+    const std::string file_name_wrong_3("./test/unit_tests/test_data/add_reaction/does_not_exist.in");
+    const std::string file_name_correct("./test/unit_tests/test_data/add_reaction/add_reactions.in");
+    const std::string species_file_name("./test/unit_tests/test_data/add_species/add_species.in");
 
-TEST(io_algorithms, add_reaction) {}
+    Species species = add_species(species_file_name);
+
+    ASSERT_THROW(add_reactions(file_name_wrong_1, species.names), Exception);
+    ASSERT_THROW(add_reactions(file_name_wrong_2, species.names), Exception);
+    ASSERT_THROW(add_reactions(file_name_wrong_3, species.names), Exception);
+    add_reactions(file_name_correct, species.names);
+}
+
+TEST(io_algorithms, add_reaction) {
+    const std::string file_name("./test/unit_tests/test_data/add_reaction/add_reactions.in");
+    const std::string species_file_name("./test/unit_tests/test_data/add_species/add_species.in");
+
+    Species species = add_species(species_file_name);
+    std::vector<Reaction> reactions = add_reactions(file_name, species.names);
+
+    ASSERT_EQ(2, reactions.size());
+}
 
 }  // namespace chem
