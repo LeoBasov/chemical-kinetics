@@ -10,10 +10,12 @@ using namespace io_algorithms;
 TEST(io_algorithms, add_species_wrong) {
     const std::string file_name_wrong_1("/test_data/add_species_wrong_1.in");
     const std::string file_name_wrong_2("/test_data/add_species_wrong_2.in");
+    const std::string file_name_wrong_3("/test_data/does_not_exist.in");
     const std::string file_name_correct("/test_data/add_species.in");
 
     ASSERT_THROW(add_species(file_name_wrong_1), Exception);
     ASSERT_THROW(add_species(file_name_wrong_2), Exception);
+    ASSERT_THROW(add_species(file_name_wrong_3), Exception);
     add_species(file_name_correct);
 }
 
