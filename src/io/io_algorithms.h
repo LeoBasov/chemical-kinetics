@@ -17,6 +17,15 @@ struct Species {
     std::vector<double> concentrations;
 };
 
+struct RateConstant {
+    enum Type { CONSTANT, VARIABLE };
+
+    Type type = CONSTANT;
+    double value = 0.0;
+    double pre_exp_factor = 0.0;
+    double activation_energy = 0.0;
+};
+
 struct Reaction {
     Reaction() {}
     Reaction(const size_t& n_species) { set_species(n_species); }
@@ -24,6 +33,8 @@ struct Reaction {
     std::vector<double> educt_stoichiometric_coefficients;
     std::vector<double> product_stoichiometric_coefficients;
     std::vector<double> reaction_powers;
+    double reaction_enthalpy = 0.0;
+    RateConstant rate_constant;
 
     void set_species(const size_t& n_species) {
         educt_stoichiometric_coefficients = std::vector<double>(n_species, 0.0);

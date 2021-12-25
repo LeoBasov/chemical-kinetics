@@ -80,8 +80,32 @@ TEST(io_algorithms, add_reaction) {
     ASSERT_DOUBLE_EQ(0.0, reactions.at(0).reaction_powers.at(2));
     ASSERT_DOUBLE_EQ(0.0, reactions.at(0).reaction_powers.at(3));
 
-    // check rate constant
-    // check reaction enthalpy
+    ASSERT_DOUBLE_EQ(7.1, reactions.at(0).reaction_enthalpy);
+
+    ASSERT_EQ(RateConstant::CONSTANT, reactions.at(0).rate_constant.type);
+    ASSERT_DOUBLE_EQ(3.7, reactions.at(0).rate_constant.value);
+
+    // reaction 2
+    ASSERT_DOUBLE_EQ(1.0, reactions.at(1).product_stoichiometric_coefficients.at(0));
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(1).product_stoichiometric_coefficients.at(1));
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(1).product_stoichiometric_coefficients.at(2));
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(1).product_stoichiometric_coefficients.at(3));
+
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(1).educt_stoichiometric_coefficients.at(0));
+    ASSERT_DOUBLE_EQ(1.0, reactions.at(1).educt_stoichiometric_coefficients.at(1));
+    ASSERT_DOUBLE_EQ(0.5, reactions.at(1).educt_stoichiometric_coefficients.at(2));
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(1).educt_stoichiometric_coefficients.at(3));
+
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(1).reaction_powers.at(0));
+    ASSERT_DOUBLE_EQ(2.0, reactions.at(1).reaction_powers.at(1));
+    ASSERT_DOUBLE_EQ(3.0, reactions.at(1).reaction_powers.at(2));
+    ASSERT_DOUBLE_EQ(0.0, reactions.at(1).reaction_powers.at(3));
+
+    ASSERT_DOUBLE_EQ(1.7, reactions.at(1).reaction_enthalpy);
+
+    ASSERT_EQ(RateConstant::VARIABLE, reactions.at(1).rate_constant.type);
+    ASSERT_DOUBLE_EQ(11.1, reactions.at(1).rate_constant.pre_exp_factor);
+    ASSERT_DOUBLE_EQ(15.7, reactions.at(1).rate_constant.activation_energy);
 }
 
 }  // namespace chem
