@@ -8,11 +8,11 @@ namespace chem {
 using namespace io_algorithms;
 
 TEST(io_algorithms, add_species_wrong) {
-    const std::string file_name_wrong_1("/test/unit_tests/test_data/add_species_wrong_1.in");
-    const std::string file_name_wrong_2("/test/unit_tests/test_data/add_species_wrong_2.in");
-    const std::string file_name_wrong_3("/test/unit_tests/test_data/add_species_wrong_3.in");
-    const std::string file_name_wrong_4("/test/unit_tests/test_data/does_not_exist.in");
-    const std::string file_name_correct("/test/unit_tests/test_data/add_species.in");
+    const std::string file_name_wrong_1("./test/unit_tests/test_data/add_species_wrong_1.in");
+    const std::string file_name_wrong_2("./test/unit_tests/test_data/add_species_wrong_2.in");
+    const std::string file_name_wrong_3("./test/unit_tests/test_data/add_species_wrong_3.in");
+    const std::string file_name_wrong_4("./test/unit_tests/test_data/does_not_exist.in");
+    const std::string file_name_correct("./test/unit_tests/test_data/add_species.in");
 
     ASSERT_THROW(add_species(file_name_wrong_1), Exception);
     ASSERT_THROW(add_species(file_name_wrong_2), Exception);
@@ -22,7 +22,7 @@ TEST(io_algorithms, add_species_wrong) {
 }
 
 TEST(io_algorithms, add_species) {
-    const std::string file_name("/test/unit_tests/test_data/add_species.in");
+    const std::string file_name("./test/unit_tests/test_data/add_species.in");
 
     Species species = add_species(file_name);
 
