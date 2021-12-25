@@ -5,7 +5,6 @@ namespace chem {
 Solver::Solver() {}
 
 void Solver::execute() {
-    // calc temperature
     // calc rate constants
     const VectorXd reaction_rates =
         algorithms::calc_reaction_rates(rate_constants_, concentrations_.back(), reaction_powers_);
@@ -13,6 +12,7 @@ void Solver::execute() {
     const double time_step = time_step_.get_dt(concentrations_.back(), dX_dt);
 
     concentrations_.push_back(concentrations_.back() + dX_dt * time_step);
+    // calc temperature
 }
 
 }  // namespace chem
