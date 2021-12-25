@@ -55,7 +55,7 @@ std::vector<Reaction> add_reactions(const std::string& file_name, const std::vec
 
             add_products(results, reaction, species_names);
             add_educts(results, reaction, species_names);
-            // TODO: add read reate constant
+            add_rate_constant(results, reaction);
             add_enthalpy(results, reaction);
 
             reactions.push_back(reaction);
@@ -127,6 +127,23 @@ void add_enthalpy(const std::vector<std::string>& line, Reaction& reaction) {
     for (size_t i = 0; i < line.size(); i++) {
         if (line.at(i) == "reaction_enthalpy") {
             reaction.reaction_enthalpy = std::stod(line.at(i + 1));
+        }
+    }
+}
+
+void add_rate_constant(const std::vector<std::string>& line, Reaction& reaction) {
+    for (size_t i = 0; i < line.size(); i++) {
+        if (line.at(i) == "rate_constant") {
+            if (line.at(i + 1) == "constant") {
+                reaction.rate_constant.type = RateConstant::CONSTANT;
+                reaction.rate_constant.value = std::stod(line.at(i + 2));
+            } else if (line.at(i + 1) == "variable") {
+                reaction.rate_constant.type = RateConstant::VARIABLE;
+                reaction.rate_constant.pre_exp_factor = std::stod(line.at(i + 2));
+                reaction.rate_constant.activation_energy = std::stod(line.at(i + 3));
+            } else {
+                throw Exception("undefined rate constant type", __PRETTY_FUNCTION__);
+            }
         }
     }
 }

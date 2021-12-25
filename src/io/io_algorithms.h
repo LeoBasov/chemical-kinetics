@@ -50,6 +50,7 @@ void add_products(const std::vector<std::string>& line, Reaction& reaction,
 void add_educts(const std::vector<std::string>& line, Reaction& reaction,
                 const std::vector<std::string>& species_names);
 void add_enthalpy(const std::vector<std::string>& line, Reaction& reaction);
+void add_rate_constant(const std::vector<std::string>& line, Reaction& reaction);
 
 std::vector<std::string> split_string(std::string str, const std::string& delimiter);
 

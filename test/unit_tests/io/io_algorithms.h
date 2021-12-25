@@ -97,8 +97,8 @@ TEST(io_algorithms, add_reaction) {
     ASSERT_DOUBLE_EQ(0.0, reactions.at(1).educt_stoichiometric_coefficients.at(3));
 
     ASSERT_DOUBLE_EQ(0.0, reactions.at(1).reaction_powers.at(0));
-    ASSERT_DOUBLE_EQ(2.0, reactions.at(1).reaction_powers.at(1));
-    ASSERT_DOUBLE_EQ(3.0, reactions.at(1).reaction_powers.at(2));
+    ASSERT_DOUBLE_EQ(3.0, reactions.at(1).reaction_powers.at(1));
+    ASSERT_DOUBLE_EQ(2.0, reactions.at(1).reaction_powers.at(2));
     ASSERT_DOUBLE_EQ(0.0, reactions.at(1).reaction_powers.at(3));
 
     ASSERT_DOUBLE_EQ(1.7, reactions.at(1).reaction_enthalpy);
