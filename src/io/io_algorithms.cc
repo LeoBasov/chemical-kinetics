@@ -56,7 +56,7 @@ std::vector<Reaction> add_reactions(const std::string& file_name, const std::vec
             add_products(results, reaction, species_names);
             add_educts(results, reaction, species_names);
             // TODO: add read reate constant
-            // TODO: add read reaction enthalpy
+            add_enthalpy(results, reaction);
 
             reactions.push_back(reaction);
         }
@@ -119,6 +119,14 @@ void add_educts(const std::vector<std::string>& line, Reaction& reaction,
                     reaction.reaction_powers.at(iter - species_names.begin()) = std::stod(power.at(1));
                 }
             }
+        }
+    }
+}
+
+void add_enthalpy(const std::vector<std::string>& line, Reaction& reaction) {
+    for (size_t i = 0; i < line.size(); i++) {
+        if (line.at(i) == "reaction_enthalpy") {
+            reaction.reaction_enthalpy = std::stod(line.at(i + 1));
         }
     }
 }
