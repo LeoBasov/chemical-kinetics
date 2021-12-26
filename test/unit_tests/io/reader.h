@@ -21,6 +21,7 @@ TEST(Reader, read_file) {
     reader.read_file(file_name_var_dt);
 
     ASSERT_EQ(TimeStep::VARIABLE, reader.get_time_step().type);
+    ASSERT_DOUBLE_EQ(1e-7, reader.get_time_step().value);
 }
 
 }  // namespace chem
