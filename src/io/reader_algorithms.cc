@@ -3,6 +3,38 @@
 namespace chem {
 namespace reader_algorithms {
 
+Thermal read_temperature(const std::string& file_name) {
+    Thermal thermal;
+    std::ifstream infile(file_name);
+    std::string line;
+
+    if (!infile.is_open()) {
+        throw Exception("file does not exist", __PRETTY_FUNCTION__);
+    }
+
+    while (std::getline(infile, line)) {
+        std::istringstream iss(line);
+        std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
+                                         std::istream_iterator<std::string>());
+
+        if (results.size() && results.front() == "time_step") {
+            if (results.size() != 3) {
+                throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
+            }
+
+            if (results.at(1) == "constant") {
+                thermal.type = Thermal::CONSTANT;
+            } else {
+                throw Exception("wrong time step type", __PRETTY_FUNCTION__);
+            }
+
+            thermal.value = std::stod(results.at(2));
+        }
+    }
+
+    return thermal;
+}
+
 TimeStep read_time_step(const std::string& file_name) {
     TimeStep time_step;
     std::ifstream infile(file_name);

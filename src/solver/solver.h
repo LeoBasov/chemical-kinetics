@@ -2,6 +2,7 @@
 
 #include "algorithms.h"
 #include "rate_constant.h"
+#include "thermal.h"
 #include "timestep.h"
 
 namespace chem {

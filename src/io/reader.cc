@@ -9,6 +9,7 @@ Solver Reader::read_file(const std::string& file_name) const {
     Species species = add_species(file_name);
     std::vector<Reaction> reactions = add_reactions(file_name, species.names);
     TimeStep time_step = read_time_step(file_name);
+    Thermal thermal = read_temperature(file_name);
 
     return solver;
 }
