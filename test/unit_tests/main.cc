@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include "exception/exception.h"
 #include "io/reader.h"
 #include "io/reader_algorithms.h"
 #include "io/writer.h"
