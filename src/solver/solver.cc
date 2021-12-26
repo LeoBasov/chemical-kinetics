@@ -32,7 +32,11 @@ void Solver::set_rate_constants(const std::vector<RateConstant>& rate_constants)
 void Solver::set_thermal(const Thermal& thermal) { thermal_ = thermal; }
 
 VectorXd Solver::calc_rate_constants() const {
-    VectorXd rate_constants;
+    VectorXd rate_constants(rate_constants_.size());
+
+    for (long i = 0; i < rate_constants.size(); i++) {
+        rate_constants(i) = rate_constants_.at(i).get_rate_constant(thermal_.value);
+    }
 
     return rate_constants;
 }
