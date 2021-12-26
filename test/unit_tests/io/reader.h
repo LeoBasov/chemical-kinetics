@@ -54,4 +54,21 @@ TEST(Reader, get_species_name) {
     ASSERT_EQ("CO2", species_names.at(3));
 }
 
+TEST(Reader, get_concentrations) {
+    const std::string file_name("./test/unit_tests/test_data/reader/reader_dt_var.in");
+    Reader reader;
+    VectorXd concentrations;
+
+    reader.read_file(file_name);
+
+    concentrations = reader.get_concentrations();
+
+    ASSERT_EQ(4, concentrations.size());
+
+    ASSERT_DOUBLE_EQ(0.5, concentrations(0));
+    ASSERT_DOUBLE_EQ(1.3, concentrations(1));
+    ASSERT_DOUBLE_EQ(7.3, concentrations(2));
+    ASSERT_DOUBLE_EQ(0.3, concentrations(3));
+}
+
 }  // namespace chem
