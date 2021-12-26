@@ -71,4 +71,23 @@ TEST(Reader, get_concentrations) {
     ASSERT_DOUBLE_EQ(0.3, concentrations(3));
 }
 
+TEST(Reader, get_rate_constants) {
+    const std::string file_name("./test/unit_tests/test_data/reader/reader_dt_var.in");
+    Reader reader;
+    std::vector<RateConstant> rate_constants;
+
+    reader.read_file(file_name);
+
+    rate_constants = reader.get_rate_constants();
+
+    ASSERT_EQ(2, rate_constants.size());
+
+    ASSERT_EQ(RateConstant::CONSTANT, rate_constants.at(0).type);
+    ASSERT_DOUBLE_EQ(3.7, rate_constants.at(0).value);
+
+    ASSERT_EQ(RateConstant::VARIABLE, rate_constants.at(1).type);
+    ASSERT_DOUBLE_EQ(11.1, rate_constants.at(1).pre_exp_factor);
+    ASSERT_DOUBLE_EQ(15.7, rate_constants.at(1).activation_energy);
+}
+
 }  // namespace chem
