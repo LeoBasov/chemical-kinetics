@@ -4,6 +4,7 @@
 #include "io/reader_algorithms.h"
 #include "io/writer.h"
 #include "solver/algorihtms.h"
+#include "solver/timestep.h"
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
