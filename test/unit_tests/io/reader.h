@@ -12,10 +12,15 @@ TEST(Reader, read_file) {
     const std::string file_name_var_dt("./test/unit_tests/test_data/reader/reader_dt_var.in");
     Reader reader;
 
-    // ASSERT_THROW(reader.read_file(wrong_file_name), Exception);
+    ASSERT_THROW(reader.read_file(wrong_file_name), Exception);
 
-    // Solver solver_const_dt = reader.read_file(file_name_const_dt);
-    // Solver solver_var_dt = reader.read_file(file_name_var_dt);
+    reader.read_file(file_name_const_dt);
+
+    ASSERT_EQ(TimeStep::CONSTANT, reader.get_time_step().type);
+
+    reader.read_file(file_name_var_dt);
+
+    ASSERT_EQ(TimeStep::VARIABLE, reader.get_time_step().type);
 }
 
 }  // namespace chem

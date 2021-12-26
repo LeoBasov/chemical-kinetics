@@ -1,4 +1,4 @@
-dt variable 1e-7
+time_step variable 1e-7
 temperature constant 2000
 
 add_species H2O 0.5

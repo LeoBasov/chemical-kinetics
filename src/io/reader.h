@@ -18,6 +18,8 @@ class Reader {
     MatrixXd get_stochiometric_matrix() const;
     std::vector<RateConstant> get_rate_constants() const;
     std::vector<std::string> get_species_name() const;
+    TimeStep get_time_step() const;
+    Thermal get_thermal() const;
 
    private:
     Species species_;

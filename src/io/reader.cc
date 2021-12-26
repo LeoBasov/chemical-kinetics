@@ -58,4 +58,8 @@ std::vector<RateConstant> Reader::get_rate_constants() const {
 
 std::vector<std::string> Reader::get_species_name() const { return species_.names; }
 
+TimeStep Reader::get_time_step() const { return time_step_; }
+
+Thermal Reader::get_thermal() const { return thermal_; }
+
 }  // namespace chem
