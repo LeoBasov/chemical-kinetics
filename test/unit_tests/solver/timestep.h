@@ -23,10 +23,12 @@ TEST(TimeStep, calc_dt) {
     timestep.value = 0.1;
 
     ASSERT_DOUBLE_EQ(0.1, timestep.calc_dt(concentrations, dX_dt));
+    ASSERT_DOUBLE_EQ(0.1, timestep.get_last_dt());
 
     timestep.type = TimeStep::VARIABLE;
 
     ASSERT_DOUBLE_EQ(0.025, timestep.calc_dt(concentrations, dX_dt));
+    ASSERT_DOUBLE_EQ(0.025, timestep.get_last_dt());
 }
 
 }  // namespace chem
