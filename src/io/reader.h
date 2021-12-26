@@ -11,7 +11,19 @@ class Reader {
     Reader();
     ~Reader() = default;
 
-    Solver read_file(const std::string& file_name) const;
+    void read_file(const std::string& file_name);
+
+    VectorXd get_concentrations() const;
+    MatrixXd get_reaction_powers() const;
+    MatrixXd get_stochiometric_matrix() const;
+    std::vector<RateConstant> get_rate_constants() const;
+    std::vector<std::string> get_species_name() const;
+
+   private:
+    Species species_;
+    std::vector<Reaction> reactions_;
+    TimeStep time_step_;
+    Thermal thermal_;
 };
 
 }  // namespace chem

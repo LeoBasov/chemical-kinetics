@@ -23,12 +23,20 @@ class Solver {
     void execute();
     State get_state() const;
 
+    void set_concentrations(const VectorXd& concentrations);
+    void set_reaction_powers(const MatrixXd& reaction_powers);
+    void set_stochiometric_matrix(const MatrixXd& stochiometric_matrix);
+    void set_time_step(const TimeStep& time_step);
+    void set_rate_constants(const std::vector<RateConstant>& rate_constants);
+    void set_thermal(const Thermal& thermal);
+
    private:
     State state_;
     MatrixXd reaction_powers_;
     MatrixXd stochiometric_matrix_;
     TimeStep time_step_;
     std::vector<RateConstant> rate_constants_;
+    Thermal thermal_;
 
     VectorXd calc_rate_constants() const;
 };

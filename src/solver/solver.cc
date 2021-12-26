@@ -17,6 +17,20 @@ void Solver::execute() {
 
 Solver::State Solver::get_state() const { return state_; }
 
+void Solver::set_concentrations(const VectorXd& concentrations) { state_.concentrations = concentrations; }
+
+void Solver::set_reaction_powers(const MatrixXd& reaction_powers) { reaction_powers_ = reaction_powers; }
+
+void Solver::set_stochiometric_matrix(const MatrixXd& stochiometric_matrix) {
+    stochiometric_matrix_ = stochiometric_matrix;
+}
+
+void Solver::set_time_step(const TimeStep& time_step) { time_step_ = time_step; }
+
+void Solver::set_rate_constants(const std::vector<RateConstant>& rate_constants) { rate_constants_ = rate_constants; }
+
+void Solver::set_thermal(const Thermal& thermal) { thermal_ = thermal; }
+
 VectorXd Solver::calc_rate_constants() const {
     VectorXd rate_constants;
 
