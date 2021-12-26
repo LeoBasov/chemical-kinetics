@@ -12,7 +12,7 @@ void Solver::execute() {
 
     state_.concentrations += dX_dt * time_step_.calc_dt(state_.concentrations, dX_dt);
     state_.time += time_step_.get_last_dt();
-    // calc temperature
+    // TODO: calc temperature
 }
 
 Solver::State Solver::get_state() const { return state_; }
