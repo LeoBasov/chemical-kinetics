@@ -2,12 +2,12 @@
 
 #include <gtest/gtest.h>
 
-#include "../../../src/io/io_algorithms.h"
+#include "../../../src/io/reader_algorithms.h"
 
 namespace chem {
-using namespace io_algorithms;
+using namespace reader_algorithms;
 
-TEST(io_algorithms, add_species_wrong) {
+TEST(reader_algorithms, add_species_wrong) {
     const std::string file_name_wrong_1("./test/unit_tests/test_data/add_species/add_species_wrong_1.in");
     const std::string file_name_wrong_2("./test/unit_tests/test_data/add_species/add_species_wrong_2.in");
     const std::string file_name_wrong_3("./test/unit_tests/test_data/add_species/add_species_wrong_3.in");
@@ -21,7 +21,7 @@ TEST(io_algorithms, add_species_wrong) {
     add_species(file_name_correct);
 }
 
-TEST(io_algorithms, add_species) {
+TEST(reader_algorithms, add_species) {
     const std::string file_name("./test/unit_tests/test_data/add_species/add_species.in");
 
     Species species = add_species(file_name);
@@ -40,7 +40,7 @@ TEST(io_algorithms, add_species) {
     ASSERT_DOUBLE_EQ(0.3, species.concentrations.at(3));
 }
 
-TEST(io_algorithms, add_reaction_wrong) {
+TEST(reader_algorithms, add_reaction_wrong) {
     const std::string file_name_wrong_1("./test/unit_tests/test_data/add_reaction/add_reactions_wrong_1.in");
     const std::string file_name_wrong_2("./test/unit_tests/test_data/add_reaction/add_reactions_wrong_2.in");
     const std::string file_name_wrong_3("./test/unit_tests/test_data/add_reaction/does_not_exist.in");
@@ -55,7 +55,7 @@ TEST(io_algorithms, add_reaction_wrong) {
     add_reactions(file_name_correct, species.names);
 }
 
-TEST(io_algorithms, add_reaction) {
+TEST(reader_algorithms, add_reaction) {
     const std::string file_name("./test/unit_tests/test_data/add_reaction/add_reactions.in");
     const std::string species_file_name("./test/unit_tests/test_data/add_species/add_species.in");
 

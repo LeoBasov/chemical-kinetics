@@ -8,9 +8,10 @@
 #include <vector>
 
 #include "../exception/exception.h"
+#include "../utilities/utility.h"
 
 namespace chem {
-namespace io_algorithms {
+namespace reader_algorithms {
 
 struct Species {
     std::vector<std::string> names;
@@ -52,7 +53,5 @@ void add_educts(const std::vector<std::string>& line, Reaction& reaction,
 void add_enthalpy(const std::vector<std::string>& line, Reaction& reaction);
 void add_rate_constant(const std::vector<std::string>& line, Reaction& reaction);
 
-std::vector<std::string> split_string(std::string str, const std::string& delimiter);
-
-}  // namespace io_algorithms
+}  // namespace reader_algorithms
 }  // namespace chem
