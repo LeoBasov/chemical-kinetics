@@ -6,8 +6,8 @@
 #include <limits>
 #include <vector>
 
-#include "../constants.h"
 #include "../exception/exception.h"
+#include "../utilities/constants.h"
 
 namespace chem {
 namespace algorithms {

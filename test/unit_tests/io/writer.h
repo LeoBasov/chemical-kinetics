@@ -2,8 +2,8 @@
 
 #include <gtest/gtest.h>
 
-#include "../../../src/io/io_algorithms.h"
 #include "../../../src/io/writer.h"
+#include "../../../src/utilities/utility.h"
 
 namespace chem {
 
@@ -26,7 +26,7 @@ TEST(Writer, open) {
     ASSERT_TRUE(infile.is_open());
 
     std::getline(infile, line);
-    std::vector<std::string> result(io_algorithms::split_string(line, ","));
+    std::vector<std::string> result(utility::split_string(line, ","));
 
     ASSERT_EQ(5, result.size());
 
@@ -64,7 +64,7 @@ TEST(Writer, write_state) {
 
     std::getline(infile, line);
     std::getline(infile, line);
-    std::vector<std::string> result(io_algorithms::split_string(line, ","));
+    std::vector<std::string> result(utility::split_string(line, ","));
 
     ASSERT_EQ(5, result.size());
 
