@@ -90,4 +90,40 @@ TEST(Reader, get_rate_constants) {
     ASSERT_DOUBLE_EQ(15.7, rate_constants.at(1).activation_energy);
 }
 
+TEST(Reader, get_stochiometric_matrix) {
+    const std::string file_name("./test/unit_tests/test_data/reader/reader_dt_var.in");
+    Reader reader;
+    MatrixXd stochiometric_matrix;
+
+    reader.read_file(file_name);
+
+    stochiometric_matrix = reader.get_stochiometric_matrix();
+
+    ASSERT_EQ(8, stochiometric_matrix.size());
+    ASSERT_EQ(4, stochiometric_matrix.rows());
+    ASSERT_EQ(2, stochiometric_matrix.cols());
+
+    ASSERT_DOUBLE_EQ(-1.0, stochiometric_matrix(0, 0));
+    ASSERT_DOUBLE_EQ(1.0, stochiometric_matrix(1, 0));
+    ASSERT_DOUBLE_EQ(0.5, stochiometric_matrix(2, 0));
+    ASSERT_DOUBLE_EQ(0.0, stochiometric_matrix(3, 0));
+
+    ASSERT_DOUBLE_EQ(1.0, stochiometric_matrix(0, 1));
+    ASSERT_DOUBLE_EQ(-1.0, stochiometric_matrix(1, 1));
+    ASSERT_DOUBLE_EQ(-0.5, stochiometric_matrix(2, 1));
+    ASSERT_DOUBLE_EQ(0.0, stochiometric_matrix(3, 1));
+}
+
+TEST(Reader, get_reaction_powers) {
+    const std::string file_name("./test/unit_tests/test_data/reader/reader_dt_var.in");
+    Reader reader;
+    MatrixXd reaction_powers;
+
+    reader.read_file(file_name);
+
+    reaction_powers = reader.get_reaction_powers();
+
+    ASSERT_EQ(8, reaction_powers.size());
+}
+
 }  // namespace chem
