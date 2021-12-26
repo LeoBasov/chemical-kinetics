@@ -44,7 +44,7 @@ TEST(Reader, get_species_name) {
 
     reader.read_file(file_name);
 
-    species_names = reader.get_species_name();
+    species_names = reader.get_species_names();
 
     ASSERT_EQ(4, species_names.size());
 

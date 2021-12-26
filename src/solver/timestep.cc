@@ -6,11 +6,11 @@ TimeStep::TimeStep() {}
 
 double TimeStep::calc_dt(const VectorXd& concentrations, const VectorXd& dX_dt) {
     switch (type) {
-        case VARIABLE: {
+        case CONSTANT: {
             last_dt = value;
             break;
         }
-        case CONSTANT: {
+        case VARIABLE: {
             last_dt = algorithms::calc_time_step(concentrations, dX_dt, value);
             break;
         }
