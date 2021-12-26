@@ -124,6 +124,18 @@ TEST(Reader, get_reaction_powers) {
     reaction_powers = reader.get_reaction_powers();
 
     ASSERT_EQ(8, reaction_powers.size());
+    ASSERT_EQ(2, reaction_powers.rows());
+    ASSERT_EQ(4, reaction_powers.cols());
+
+    ASSERT_DOUBLE_EQ(1.0, reaction_powers(0, 0));
+    ASSERT_DOUBLE_EQ(0.0, reaction_powers(0, 1));
+    ASSERT_DOUBLE_EQ(0.0, reaction_powers(0, 2));
+    ASSERT_DOUBLE_EQ(0.0, reaction_powers(0, 3));
+
+    ASSERT_DOUBLE_EQ(0.0, reaction_powers(1, 0));
+    ASSERT_DOUBLE_EQ(3.0, reaction_powers(1, 1));
+    ASSERT_DOUBLE_EQ(2.0, reaction_powers(1, 2));
+    ASSERT_DOUBLE_EQ(0.0, reaction_powers(1, 3));
 }
 
 }  // namespace chem
