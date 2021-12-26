@@ -1,6 +1,7 @@
 #pragma once
 
 #include "algorithms.h"
+#include "rate_constant.h"
 #include "timestep.h"
 
 namespace chem {
@@ -23,9 +24,11 @@ class Solver {
 
    private:
     State state_;
-    VectorXd rate_constants_;
     MatrixXd reaction_powers_;
     MatrixXd stochiometric_matrix_;
     TimeStep time_step_;
+    std::vector<RateConstant> rate_constants_;
+
+    VectorXd calc_rate_constants() const;
 };
 }  // namespace chem
