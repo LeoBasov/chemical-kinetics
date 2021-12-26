@@ -1,8 +1,9 @@
 time_step variable 0.1
 temperature constant 2000
 
-add_species H2O 0.5
-add_species O2 1.3
-add_species H2 7.3 CO2 0.3
+add_species C8H18 4.0
+add_species O2 4.0
+add_species CO2 0.0
+add_species H2O 0.0
 
-add_reaction educts 1 1.0*H2O^1 products 2 0.5*H2 1.0*O2 rate_constant constant 3.7 reaction_enthalpy 7.1
+add_reaction educts 2 1.0*C8H18^0.1 3.5*O2^1.65 products 2 2.0*CO2 3.0*H2O rate_constant constant 2.83583586672916e-15 reaction_enthalpy 7.1
