@@ -8,7 +8,7 @@ void Writer::open(const std::string& file_name, const std::vector<std::string>& 
     stream_.open(file_name);
 
     if (!stream_.is_open()) {
-        throw Exception("could not open/create file", __PRETTY_FUNCTION__);
+        throw Exception("could not open or create file", __PRETTY_FUNCTION__);
     }
 
     write_header(species_names);
@@ -23,5 +23,7 @@ void Writer::write_header(const std::vector<std::string>& species_names) {
 
     stream_ << std::endl;
 }
+
+void Writer::write_state() {}
 
 }  // namespace chem

@@ -13,6 +13,7 @@ class Writer {
     ~Writer() = default;
 
     void open(const std::string &file_name, const std::vector<std::string> &species_names);
+    void write_state();
 
    private:
     std::ofstream stream_;

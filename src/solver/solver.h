@@ -14,8 +14,7 @@ class Solver {
     void execute();
 
    private:
-    std::vector<double> dts_;
-    std::vector<VectorXd> concentrations_;
+    VectorXd concentrations_;
     VectorXd rate_constants_;
     MatrixXd reaction_powers_;
     MatrixXd stochiometric_matrix_;
