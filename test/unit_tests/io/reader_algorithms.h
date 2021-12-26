@@ -82,7 +82,7 @@ TEST(reader_algorithms, add_reaction) {
 
     ASSERT_DOUBLE_EQ(7.1, reactions.at(0).reaction_enthalpy);
 
-    ASSERT_EQ(reader_algorithms::RateConstant::CONSTANT, reactions.at(0).rate_constant.type);
+    ASSERT_EQ(RateConstant::CONSTANT, reactions.at(0).rate_constant.type);
     ASSERT_DOUBLE_EQ(3.7, reactions.at(0).rate_constant.value);
 
     // reaction 2
@@ -103,7 +103,7 @@ TEST(reader_algorithms, add_reaction) {
 
     ASSERT_DOUBLE_EQ(1.7, reactions.at(1).reaction_enthalpy);
 
-    ASSERT_EQ(reader_algorithms::RateConstant::VARIABLE, reactions.at(1).rate_constant.type);
+    ASSERT_EQ(RateConstant::VARIABLE, reactions.at(1).rate_constant.type);
     ASSERT_DOUBLE_EQ(11.1, reactions.at(1).rate_constant.pre_exp_factor);
     ASSERT_DOUBLE_EQ(15.7, reactions.at(1).rate_constant.activation_energy);
 }

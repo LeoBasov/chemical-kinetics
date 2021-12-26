@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "../exception/exception.h"
+#include "../solver/rate_constant.h"
 #include "../utilities/utility.h"
 
 namespace chem {
@@ -16,15 +17,6 @@ namespace reader_algorithms {
 struct Species {
     std::vector<std::string> names;
     std::vector<double> concentrations;
-};
-
-struct RateConstant {
-    enum Type { CONSTANT, VARIABLE };
-
-    Type type = CONSTANT;
-    double value = 0.0;
-    double pre_exp_factor = 0.0;
-    double activation_energy = 0.0;
 };
 
 struct Reaction {
