@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
         std::cout << "\"" << e.what() << "\" thrown in " << e.where() << std::endl;
         return 1;
     } catch (std::exception& e) {
-        std::cout << e.what() << std::endl;
+        std::cout << "\"" << e.what() << "\"" << std::endl;
         return 1;
     }
 
