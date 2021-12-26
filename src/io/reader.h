@@ -4,6 +4,7 @@
 #include "reader_algorithms.h"
 
 namespace chem {
+using namespace reader_algorithms;
 
 class Reader {
    public:
