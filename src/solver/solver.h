@@ -8,14 +8,21 @@ using namespace Eigen;
 
 class Solver {
    public:
+    struct State {
+        VectorXd concentrations;
+        double time = 0.0;
+        double temperature = 0.0;
+    };
+
+   public:
     Solver();
     ~Solver() = default;
 
     void execute();
+    State get_state() const;
 
    private:
-    std::vector<double> dts_;
-    std::vector<VectorXd> concentrations_;
+    State state_;
     VectorXd rate_constants_;
     MatrixXd reaction_powers_;
     MatrixXd stochiometric_matrix_;
