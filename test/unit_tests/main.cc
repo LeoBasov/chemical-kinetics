@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "io/io_algorithms.h"
+#include "io/reader.h"
 #include "io/writer.h"
 #include "solver/algorihtms.h"
 
