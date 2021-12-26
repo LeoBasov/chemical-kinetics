@@ -26,17 +26,18 @@ int main(int argc, char** argv) {
             reader.read_file(file_name);
 
             set_up_solver(solver, reader);
+            writer.open("file.csv", reader.get_species_names());
 
             std::cout << "executing" << std::endl;
             write_header(reader);
             write_body(solver.get_state());
+            writer.write_state(solver.get_state());
 
             for (int i = 0; i < n_iters; i++) {
                 solver.execute();
                 write_body(solver.get_state());
+                writer.write_state(solver.get_state());
             }
-
-            std::cout << "writing" << std::endl;
         }
     } catch (Exception& e) {
         std::cout << "\"" << e.what() << "\" thrown in " << e.where() << std::endl;
@@ -61,7 +62,7 @@ void set_up_solver(Solver& solver, const Reader& reader) {
 void write_header(const Reader& reader) {
     std::cout << "#t,#T";
 
-    for (const auto& name : reader.get_species_name()) {
+    for (const auto& name : reader.get_species_names()) {
         std::cout << ",#" << name;
     }
 

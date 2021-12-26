@@ -56,7 +56,7 @@ std::vector<RateConstant> Reader::get_rate_constants() const {
     return rate_constants;
 }
 
-std::vector<std::string> Reader::get_species_name() const { return species_.names; }
+std::vector<std::string> Reader::get_species_names() const { return species_.names; }
 
 TimeStep Reader::get_time_step() const { return time_step_; }
 
