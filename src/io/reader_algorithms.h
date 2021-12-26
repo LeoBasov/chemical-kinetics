@@ -9,6 +9,7 @@
 
 #include "../exception/exception.h"
 #include "../solver/rate_constant.h"
+#include "../solver/timestep.h"
 #include "../utilities/utility.h"
 
 namespace chem {
@@ -36,6 +37,7 @@ struct Reaction {
     }
 };
 
+TimeStep read_time_step(const std::string& file_name);
 Species add_species(const std::string& file_name);
 std::vector<Reaction> add_reactions(const std::string& file_name, const std::vector<std::string>& species_names);
 void add_products(const std::vector<std::string>& line, Reaction& reaction,
