@@ -7,24 +7,24 @@
 namespace chem {
 using namespace reader_algorithms;
 
-TEST(reader_algorithms, add_species_wrong) {
+TEST(reader_algorithms, read_species_wrong) {
     const std::string file_name_wrong_1("./test/unit_tests/test_data/add_species/add_species_wrong_1.in");
     const std::string file_name_wrong_2("./test/unit_tests/test_data/add_species/add_species_wrong_2.in");
     const std::string file_name_wrong_3("./test/unit_tests/test_data/add_species/add_species_wrong_3.in");
     const std::string file_name_wrong_4("./test/unit_tests/test_data/add_species/does_not_exist.in");
     const std::string file_name_correct("./test/unit_tests/test_data/add_species/add_species.in");
 
-    ASSERT_THROW(add_species(file_name_wrong_1), Exception);
-    ASSERT_THROW(add_species(file_name_wrong_2), Exception);
-    ASSERT_THROW(add_species(file_name_wrong_3), Exception);
-    ASSERT_THROW(add_species(file_name_wrong_4), Exception);
-    add_species(file_name_correct);
+    ASSERT_THROW(read_species(file_name_wrong_1), Exception);
+    ASSERT_THROW(read_species(file_name_wrong_2), Exception);
+    ASSERT_THROW(read_species(file_name_wrong_3), Exception);
+    ASSERT_THROW(read_species(file_name_wrong_4), Exception);
+    read_species(file_name_correct);
 }
 
-TEST(reader_algorithms, add_species) {
+TEST(reader_algorithms, read_species) {
     const std::string file_name("./test/unit_tests/test_data/add_species/add_species.in");
 
-    Species species = add_species(file_name);
+    Species species = read_species(file_name);
 
     ASSERT_EQ(species.concentrations.size(), species.names.size());
     ASSERT_EQ(4, species.names.size());
@@ -47,7 +47,7 @@ TEST(reader_algorithms, add_reaction_wrong) {
     const std::string file_name_correct("./test/unit_tests/test_data/add_reaction/add_reactions.in");
     const std::string species_file_name("./test/unit_tests/test_data/add_species/add_species.in");
 
-    Species species = add_species(species_file_name);
+    Species species = read_species(species_file_name);
 
     ASSERT_THROW(add_reactions(file_name_wrong_1, species.names), Exception);
     ASSERT_THROW(add_reactions(file_name_wrong_2, species.names), Exception);
@@ -59,7 +59,7 @@ TEST(reader_algorithms, add_reaction) {
     const std::string file_name("./test/unit_tests/test_data/add_reaction/add_reactions.in");
     const std::string species_file_name("./test/unit_tests/test_data/add_species/add_species.in");
 
-    Species species = add_species(species_file_name);
+    Species species = read_species(species_file_name);
     std::vector<Reaction> reactions = add_reactions(file_name, species.names);
 
     ASSERT_EQ(2, reactions.size());

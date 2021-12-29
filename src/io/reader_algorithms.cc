@@ -73,7 +73,7 @@ TimeStep read_time_step(const std::string& file_name) {
     throw Exception("time_step not found", __PRETTY_FUNCTION__);
 }
 
-Species add_species(const std::string& file_name) {
+Species read_species(const std::string& file_name) {
     Species species;
     std::ifstream infile(file_name);
     std::string line;

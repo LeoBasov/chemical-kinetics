@@ -40,7 +40,7 @@ struct Reaction {
 
 Thermal read_temperature(const std::string& file_name);
 TimeStep read_time_step(const std::string& file_name);
-Species add_species(const std::string& file_name);
+Species read_species(const std::string& file_name);
 std::vector<Reaction> add_reactions(const std::string& file_name, const std::vector<std::string>& species_names);
 void add_products(const std::vector<std::string>& line, Reaction& reaction,
                   const std::vector<std::string>& species_names);
