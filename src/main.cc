@@ -1,4 +1,5 @@
 #include "io/reader.h"
+#include "io/sc_print_algorithms.h"
 #include "io/writer.h"
 #include "solver/solver.h"
 
@@ -22,13 +23,16 @@ int main(int argc, char** argv) {
             file_name = argv[1];
             n_iters = std::stoi(argv[2]);
 
-            std::cout << "reading" << std::endl;
             reader.read_file(file_name);
+
+            //---------------------------------------
+            sc_print_algorithms::print_species(reader.get_species());
+            sc_print_algorithms::print_reactions(reader.get_reactions(), reader.get_species());
+            //---------------------------------------
 
             set_up_solver(solver, reader);
             writer.open("file.csv", reader.get_species_names());
 
-            std::cout << "executing" << std::endl;
             write_header(reader);
             write_body(solver.get_state());
             writer.write_state(solver.get_state());
@@ -60,20 +64,22 @@ void set_up_solver(Solver& solver, const Reader& reader) {
 }
 
 void write_header(const Reader& reader) {
-    std::cout << "#t,#T";
+    std::cout << sc_print_algorithms::tab(sc_print_algorithms::tab_size);
+    std::cout << "t, T";
 
     for (const auto& name : reader.get_species_names()) {
-        std::cout << ",#" << name;
+        std::cout << ", " << name;
     }
 
     std::cout << std::endl;
 }
 
 void write_body(const Solver::State& state) {
-    std::cout << state.time << "," << state.temperature;
+    std::cout << sc_print_algorithms::tab(sc_print_algorithms::tab_size);
+    std::cout << std::to_string(state.time) << ", " << std::to_string(state.temperature);
 
     for (long i = 0; i < state.concentrations.size(); i++) {
-        std::cout << "," << state.concentrations(i);
+        std::cout << ", " << std::to_string(state.concentrations(i));
     }
 
     std::cout << std::endl;

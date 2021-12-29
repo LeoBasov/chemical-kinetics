@@ -25,10 +25,10 @@ void Writer::write_header(const std::vector<std::string>& species_names) {
 }
 
 void Writer::write_state(const Solver::State& state) {
-    stream_ << state.time << "," << state.temperature;
+    stream_ << std::to_string(state.time) << "," << std::to_string(state.temperature);
 
     for (long i = 0; i < state.concentrations.size(); i++) {
-        stream_ << "," << state.concentrations(i);
+        stream_ << "," << std::to_string(state.concentrations(i));
     }
 
     stream_ << std::endl;

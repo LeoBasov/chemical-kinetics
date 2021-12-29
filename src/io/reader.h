@@ -21,6 +21,9 @@ class Reader {
     TimeStep get_time_step() const;
     Thermal get_thermal() const;
 
+    Species get_species() const;
+    std::vector<Reaction> get_reactions() const;
+
    private:
     Species species_;
     std::vector<Reaction> reactions_;

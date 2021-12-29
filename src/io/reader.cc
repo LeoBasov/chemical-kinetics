@@ -62,4 +62,8 @@ TimeStep Reader::get_time_step() const { return time_step_; }
 
 Thermal Reader::get_thermal() const { return thermal_; }
 
+Species Reader::get_species() const { return species_; }
+
+std::vector<Reaction> Reader::get_reactions() const { return reactions_; }
+
 }  // namespace chem

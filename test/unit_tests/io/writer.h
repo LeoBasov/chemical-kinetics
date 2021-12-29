@@ -48,7 +48,7 @@ TEST(Writer, write_state) {
     species_names.push_back("H2");
 
     state.temperature = 11.1;
-    state.time = 13.13;
+    state.time = 13.130000;
 
     state.concentrations = VectorXd(3);
 
@@ -68,11 +68,11 @@ TEST(Writer, write_state) {
 
     ASSERT_EQ(5, result.size());
 
-    ASSERT_EQ("13.13", result.at(0));
-    ASSERT_EQ("11.1", result.at(1));
-    ASSERT_EQ("3.3", result.at(2));
-    ASSERT_EQ("5.5", result.at(3));
-    ASSERT_EQ("7.7", result.at(4));
+    ASSERT_EQ("13.130000", result.at(0));
+    ASSERT_EQ("11.100000", result.at(1));
+    ASSERT_EQ("3.300000", result.at(2));
+    ASSERT_EQ("5.500000", result.at(3));
+    ASSERT_EQ("7.700000", result.at(4));
 }
 
 }  // namespace chem
