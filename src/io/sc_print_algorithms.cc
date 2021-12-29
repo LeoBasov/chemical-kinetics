@@ -34,13 +34,13 @@ void print_reactions(const std::vector<Reaction>& reactions, const Species& spec
     std::cout << std::endl;
 }
 
-void print_reaction(const Reaction& reactions, const Species& species) {
+void print_reaction(const Reaction& reaction, const Species& species) {
     bool skipped(false);
 
     std::cout << tab(tab_size) << "reaction: ";
 
-    for (size_t i = 0; i < reactions.educt_stoichiometric_coefficients.size(); i++) {
-        if (!reactions.educt_stoichiometric_coefficients.at(i)) {
+    for (size_t i = 0; i < reaction.educt_stoichiometric_coefficients.size(); i++) {
+        if (!reaction.educt_stoichiometric_coefficients.at(i)) {
             skipped = true;
             continue;
         }
@@ -49,14 +49,14 @@ void print_reaction(const Reaction& reactions, const Species& species) {
             std::cout << " + ";
         }
 
-        std::cout << reactions.educt_stoichiometric_coefficients.at(i) << "⋅" << species.names.at(i);
+        std::cout << reaction.educt_stoichiometric_coefficients.at(i) << "⋅" << species.names.at(i);
         skipped = false;
     }
 
     std::cout << " →  ";
 
-    for (size_t i = 0; i < reactions.product_stoichiometric_coefficients.size(); i++) {
-        if (!reactions.product_stoichiometric_coefficients.at(i)) {
+    for (size_t i = 0; i < reaction.product_stoichiometric_coefficients.size(); i++) {
+        if (!reaction.product_stoichiometric_coefficients.at(i)) {
             skipped = true;
             continue;
         }
@@ -65,8 +65,14 @@ void print_reaction(const Reaction& reactions, const Species& species) {
             std::cout << " + ";
         }
 
-        std::cout << reactions.product_stoichiometric_coefficients.at(i) << "⋅" << species.names.at(i);
+        std::cout << reaction.product_stoichiometric_coefficients.at(i) << "⋅" << species.names.at(i);
         skipped = false;
+    }
+
+    if (reaction.rate_constant.type == RateConstant::CONSTANT) {
+        std::cout << " : k = CONST";
+    } else {
+        std::cout << " : k = VARIABLE";
     }
 
     std::cout << std::endl;

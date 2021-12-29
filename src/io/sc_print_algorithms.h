@@ -11,7 +11,7 @@ const size_t tab_size(4);
 
 void print_species(const Species& species);
 void print_reactions(const std::vector<Reaction>& reactions, const Species& species);
-void print_reaction(const Reaction& reactions, const Species& species);
+void print_reaction(const Reaction& reaction, const Species& species);
 
 std::string tab(const size_t& n);
 
