@@ -30,7 +30,7 @@ class Reader {
     std::vector<Reaction> reactions_;
     TimeStep time_step_;
     Thermal thermal_;
-    unsigned int number_iterations_;
+    unsigned int number_iterations_ = 0;
 };
 
 }  // namespace chem

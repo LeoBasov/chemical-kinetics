@@ -26,7 +26,7 @@ unsigned int read_number_of_iterations(const std::string& file_name) {
         }
     }
 
-    throw Exception("temperature not found", __PRETTY_FUNCTION__);
+    throw Exception("n_iterations not found", __PRETTY_FUNCTION__);
 }
 
 Thermal read_temperature(const std::string& file_name) {
