@@ -29,7 +29,10 @@ void Solver::set_time_step(const TimeStep& time_step) { time_step_ = time_step; 
 
 void Solver::set_rate_constants(const std::vector<RateConstant>& rate_constants) { rate_constants_ = rate_constants; }
 
-void Solver::set_thermal(const Thermal& thermal) { thermal_ = thermal; }
+void Solver::set_thermal(const Thermal& thermal) {
+    thermal_ = thermal;
+    state_.temperature = thermal_.value;  // TODO: implement variable temperature
+}
 
 VectorXd Solver::calc_rate_constants() const {
     VectorXd rate_constants(rate_constants_.size());
