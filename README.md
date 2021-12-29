@@ -7,7 +7,7 @@
 3. Installation
 
 # 1. Introduction
-Simulation suit to solve problems from the domain of heat and mass transfer.
+Simulation suit to solve chemical kinetics.
 
 # 2. Requirements
 ## 2.1 Base
