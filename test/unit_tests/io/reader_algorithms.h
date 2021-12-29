@@ -7,6 +7,18 @@
 namespace chem {
 using namespace reader_algorithms;
 
+TEST(reader_algorithms, read_number_of_iterations){
+    const std::string file_name_wrong_1("./test/unit_tests/test_data/read_number_of_iterations/number_of_iter_wrong.in");
+    const std::string file_name_wrong_2("./test/unit_tests/test_data/read_number_of_iterations/does_not_exist.in");
+    const std::string file_name_correct("./test/unit_tests/test_data/read_number_of_iterations/number_of_iter.in");
+
+    ASSERT_THROW(read_number_of_iterations(file_name_wrong_1), Exception);
+    ASSERT_THROW(read_number_of_iterations(file_name_wrong_2), Exception);;
+    const unsigned int n_iter = read_number_of_iterations(file_name_correct);
+
+    ASSERT_EQ(100, n_iter);
+}
+
 TEST(reader_algorithms, read_species_wrong) {
     const std::string file_name_wrong_1("./test/unit_tests/test_data/add_species/add_species_wrong_1.in");
     const std::string file_name_wrong_2("./test/unit_tests/test_data/add_species/add_species_wrong_2.in");

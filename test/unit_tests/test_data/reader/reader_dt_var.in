@@ -1,3 +1,4 @@
+n_iterations 123
 time_step variable 1e-7
 temperature constant 2000
 

@@ -38,6 +38,7 @@ struct Reaction {
     }
 };
 
+unsigned int read_number_of_iterations(const std::string& file_name);
 Thermal read_temperature(const std::string& file_name);
 TimeStep read_time_step(const std::string& file_name);
 Species read_species(const std::string& file_name);
