@@ -22,6 +22,7 @@ class Reader {
     Thermal get_thermal() const;
 
     Species get_species() const;
+    std::vector<Reaction> get_reactions() const;
 
    private:
     Species species_;

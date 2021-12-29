@@ -27,6 +27,7 @@ int main(int argc, char** argv) {
 
             //---------------------------------------
             sc_print_algorithms::print_species(reader.get_species());
+            sc_print_algorithms::print_reactions(reader.get_reactions(), reader.get_species());
             //---------------------------------------
 
             set_up_solver(solver, reader);
