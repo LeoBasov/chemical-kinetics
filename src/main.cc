@@ -65,10 +65,10 @@ void set_up_solver(Solver& solver, const Reader& reader) {
 }
 
 void write_header(const Reader& reader) {
-    std::cout << "#t,#T";
+    std::cout << "t, T";
 
     for (const auto& name : reader.get_species_names()) {
-        std::cout << ",#" << name;
+        std::cout << ", " << name;
     }
 
     std::cout << std::endl;
