@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - temperature calculation
+- formated screen io
+- setting of iteration number in iput file
+- setting of output file name in input file
 
 ## [1.1.0] - 2021-12-28
 ### Added
