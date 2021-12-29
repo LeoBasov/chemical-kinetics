@@ -75,10 +75,10 @@ void write_header(const Reader& reader) {
 }
 
 void write_body(const Solver::State& state) {
-    std::cout << state.time << "," << state.temperature;
+    std::cout << std::to_string(state.time) << ", " << std::to_string(state.temperature);
 
     for (long i = 0; i < state.concentrations.size(); i++) {
-        std::cout << "," << state.concentrations(i);
+        std::cout << ", " << std::to_string(state.concentrations(i));
     }
 
     std::cout << std::endl;
