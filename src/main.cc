@@ -1,4 +1,5 @@
 #include "io/reader.h"
+#include "io/sc_print_algorithms.h"
 #include "io/writer.h"
 #include "solver/solver.h"
 
@@ -22,8 +23,11 @@ int main(int argc, char** argv) {
             file_name = argv[1];
             n_iters = std::stoi(argv[2]);
 
-            std::cout << "reading" << std::endl;
             reader.read_file(file_name);
+
+            //---------------------------------------
+            sc_print_algorithms::print_species(reader.get_species());
+            //---------------------------------------
 
             set_up_solver(solver, reader);
             writer.open("file.csv", reader.get_species_names());
