@@ -40,7 +40,7 @@ TEST(reader_algorithms, read_species) {
     ASSERT_DOUBLE_EQ(0.3, species.concentrations.at(3));
 }
 
-TEST(reader_algorithms, add_reaction_wrong) {
+TEST(reader_algorithms, read_reactions_wrong) {
     const std::string file_name_wrong_1("./test/unit_tests/test_data/add_reaction/add_reactions_wrong_1.in");
     const std::string file_name_wrong_2("./test/unit_tests/test_data/add_reaction/add_reactions_wrong_2.in");
     const std::string file_name_wrong_3("./test/unit_tests/test_data/add_reaction/does_not_exist.in");
@@ -49,18 +49,18 @@ TEST(reader_algorithms, add_reaction_wrong) {
 
     Species species = read_species(species_file_name);
 
-    ASSERT_THROW(add_reactions(file_name_wrong_1, species.names), Exception);
-    ASSERT_THROW(add_reactions(file_name_wrong_2, species.names), Exception);
-    ASSERT_THROW(add_reactions(file_name_wrong_3, species.names), Exception);
-    add_reactions(file_name_correct, species.names);
+    ASSERT_THROW(read_reactions(file_name_wrong_1, species.names), Exception);
+    ASSERT_THROW(read_reactions(file_name_wrong_2, species.names), Exception);
+    ASSERT_THROW(read_reactions(file_name_wrong_3, species.names), Exception);
+    read_reactions(file_name_correct, species.names);
 }
 
-TEST(reader_algorithms, add_reaction) {
+TEST(reader_algorithms, read_reactions) {
     const std::string file_name("./test/unit_tests/test_data/add_reaction/add_reactions.in");
     const std::string species_file_name("./test/unit_tests/test_data/add_species/add_species.in");
 
     Species species = read_species(species_file_name);
-    std::vector<Reaction> reactions = add_reactions(file_name, species.names);
+    std::vector<Reaction> reactions = read_reactions(file_name, species.names);
 
     ASSERT_EQ(2, reactions.size());
 

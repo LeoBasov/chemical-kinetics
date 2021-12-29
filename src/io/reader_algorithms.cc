@@ -106,7 +106,7 @@ Species read_species(const std::string& file_name) {
     return species;
 }
 
-std::vector<Reaction> add_reactions(const std::string& file_name, const std::vector<std::string>& species_names) {
+std::vector<Reaction> read_reactions(const std::string& file_name, const std::vector<std::string>& species_names) {
     std::vector<Reaction> reactions;
     std::ifstream infile(file_name);
     std::string line;
@@ -123,10 +123,10 @@ std::vector<Reaction> add_reactions(const std::string& file_name, const std::vec
         if (results.size() && results.front() == "add_reaction") {
             Reaction reaction(species_names.size());
 
-            add_products(results, reaction, species_names);
-            add_educts(results, reaction, species_names);
-            add_rate_constant(results, reaction);
-            add_enthalpy(results, reaction);
+            read_products(results, reaction, species_names);
+            read_educts(results, reaction, species_names);
+            read_rate_constant(results, reaction);
+            read_enthalpy(results, reaction);
 
             reactions.push_back(reaction);
         }
@@ -139,8 +139,8 @@ std::vector<Reaction> add_reactions(const std::string& file_name, const std::vec
     return reactions;
 }
 
-void add_products(const std::vector<std::string>& line, Reaction& reaction,
-                  const std::vector<std::string>& species_names) {
+void read_products(const std::vector<std::string>& line, Reaction& reaction,
+                   const std::vector<std::string>& species_names) {
     for (size_t i = 0; i < line.size(); i++) {
         if (line.at(i) == "products") {
             const unsigned int n_products(std::stoi(line.at(i + 1)));
@@ -165,8 +165,8 @@ void add_products(const std::vector<std::string>& line, Reaction& reaction,
     }
 }
 
-void add_educts(const std::vector<std::string>& line, Reaction& reaction,
-                const std::vector<std::string>& species_names) {
+void read_educts(const std::vector<std::string>& line, Reaction& reaction,
+                 const std::vector<std::string>& species_names) {
     for (size_t i = 0; i < line.size(); i++) {
         if (line.at(i) == "educts") {
             const unsigned int n_educts(std::stoi(line.at(i + 1)));
@@ -193,7 +193,7 @@ void add_educts(const std::vector<std::string>& line, Reaction& reaction,
     }
 }
 
-void add_enthalpy(const std::vector<std::string>& line, Reaction& reaction) {
+void read_enthalpy(const std::vector<std::string>& line, Reaction& reaction) {
     for (size_t i = 0; i < line.size(); i++) {
         if (line.at(i) == "reaction_enthalpy") {
             reaction.reaction_enthalpy = std::stod(line.at(i + 1));
@@ -201,7 +201,7 @@ void add_enthalpy(const std::vector<std::string>& line, Reaction& reaction) {
     }
 }
 
-void add_rate_constant(const std::vector<std::string>& line, Reaction& reaction) {
+void read_rate_constant(const std::vector<std::string>& line, Reaction& reaction) {
     for (size_t i = 0; i < line.size(); i++) {
         if (line.at(i) == "rate_constant") {
             if (line.at(i + 1) == "constant") {

@@ -6,7 +6,7 @@ Reader::Reader() {}
 
 void Reader::read_file(const std::string& file_name) {
     species_ = read_species(file_name);
-    reactions_ = add_reactions(file_name, species_.names);
+    reactions_ = read_reactions(file_name, species_.names);
     time_step_ = read_time_step(file_name);
     thermal_ = read_temperature(file_name);
 }

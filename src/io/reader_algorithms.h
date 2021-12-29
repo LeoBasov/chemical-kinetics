@@ -41,13 +41,13 @@ struct Reaction {
 Thermal read_temperature(const std::string& file_name);
 TimeStep read_time_step(const std::string& file_name);
 Species read_species(const std::string& file_name);
-std::vector<Reaction> add_reactions(const std::string& file_name, const std::vector<std::string>& species_names);
-void add_products(const std::vector<std::string>& line, Reaction& reaction,
-                  const std::vector<std::string>& species_names);
-void add_educts(const std::vector<std::string>& line, Reaction& reaction,
-                const std::vector<std::string>& species_names);
-void add_enthalpy(const std::vector<std::string>& line, Reaction& reaction);
-void add_rate_constant(const std::vector<std::string>& line, Reaction& reaction);
+std::vector<Reaction> read_reactions(const std::string& file_name, const std::vector<std::string>& species_names);
+void read_products(const std::vector<std::string>& line, Reaction& reaction,
+                   const std::vector<std::string>& species_names);
+void read_educts(const std::vector<std::string>& line, Reaction& reaction,
+                 const std::vector<std::string>& species_names);
+void read_enthalpy(const std::vector<std::string>& line, Reaction& reaction);
+void read_rate_constant(const std::vector<std::string>& line, Reaction& reaction);
 
 }  // namespace reader_algorithms
 }  // namespace chem
