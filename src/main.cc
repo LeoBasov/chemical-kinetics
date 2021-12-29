@@ -33,7 +33,6 @@ int main(int argc, char** argv) {
             set_up_solver(solver, reader);
             writer.open("file.csv", reader.get_species_names());
 
-            std::cout << "executing" << std::endl;
             write_header(reader);
             write_body(solver.get_state());
             writer.write_state(solver.get_state());
@@ -65,6 +64,7 @@ void set_up_solver(Solver& solver, const Reader& reader) {
 }
 
 void write_header(const Reader& reader) {
+    std::cout << sc_print_algorithms::tab(sc_print_algorithms::tab_size);
     std::cout << "t, T";
 
     for (const auto& name : reader.get_species_names()) {
@@ -75,6 +75,7 @@ void write_header(const Reader& reader) {
 }
 
 void write_body(const Solver::State& state) {
+    std::cout << sc_print_algorithms::tab(sc_print_algorithms::tab_size);
     std::cout << std::to_string(state.time) << ", " << std::to_string(state.temperature);
 
     for (long i = 0; i < state.concentrations.size(); i++) {
