@@ -10,6 +10,7 @@ void Reader::read_file(const std::string& file_name) {
     time_step_ = read_time_step(file_name);
     thermal_ = read_temperature(file_name);
     number_iterations_ = read_number_of_iterations(file_name);
+    output_file_ = read_output_file_name(file_name);
 }
 
 VectorXd Reader::get_concentrations() const {
@@ -68,5 +69,7 @@ Species Reader::get_species() const { return species_; }
 std::vector<Reaction> Reader::get_reactions() const { return reactions_; }
 
 unsigned int Reader::get_number_iterations() const { return number_iterations_; }
+
+std::string Reader::get_output_file() const { return output_file_; }
 
 }  // namespace chem

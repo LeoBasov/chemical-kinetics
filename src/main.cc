@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
             //---------------------------------------
 
             set_up_solver(solver, reader);
-            writer.open("file.csv", reader.get_species_names());
+            writer.open(reader.get_output_file(), reader.get_species_names());
 
             write_header(reader);
             write_body(solver.get_state());

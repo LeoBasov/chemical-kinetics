@@ -1,3 +1,4 @@
+output_file covid.csv
 n_iterations 200
 time_step variable 0.1
 temperature constant 300

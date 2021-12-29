@@ -3,8 +3,32 @@
 namespace chem {
 namespace reader_algorithms {
 
+std::string read_output_file_name(const std::string& file_name) {
+    std::ifstream infile(file_name);
+    std::string line;
+
+    if (!infile.is_open()) {
+        throw Exception("file does not exist", __PRETTY_FUNCTION__);
+    }
+
+    while (std::getline(infile, line)) {
+        std::istringstream iss(line);
+        std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
+                                         std::istream_iterator<std::string>());
+
+        if (results.size() && results.front() == "output_file") {
+            if (results.size() != 2) {
+                throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
+            } else {
+                return results.at(1);
+            }
+        }
+    }
+
+    throw Exception("output_file not found", __PRETTY_FUNCTION__);
+}
+
 unsigned int read_number_of_iterations(const std::string& file_name) {
-    Thermal thermal;
     std::ifstream infile(file_name);
     std::string line;
 
