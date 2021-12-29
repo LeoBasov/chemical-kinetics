@@ -1,6 +1,5 @@
-output_file test_reader.csv
-n_iterations 123
-time_step variable 1e-7
+n_iterations 100
+time_step constant 1e-7
 temperature constant 2000
 
 add_species H2O 0.5

@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - temperature calculation
-- setting of iteration number in iput file
+
+## [1.3.0] - 2021-12-29
+### Added
+- setting of iteration number in input file
 - setting of output file name in input file
 
 ## [1.2.1] - 2021-12-29

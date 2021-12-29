@@ -13,15 +13,13 @@ int main(int argc, char** argv) {
     Reader reader;
     Writer writer;
     Solver solver;
-    int n_iters(0);
     std::string file_name;
 
     try {
-        if (argc != 3) {
+        if (argc != 2) {
             throw Exception("wrong argument count [" + std::to_string(argc) + "]", __PRETTY_FUNCTION__);
         } else {
             file_name = argv[1];
-            n_iters = std::stoi(argv[2]);
 
             reader.read_file(file_name);
 
@@ -31,13 +29,13 @@ int main(int argc, char** argv) {
             //---------------------------------------
 
             set_up_solver(solver, reader);
-            writer.open("file.csv", reader.get_species_names());
+            writer.open(reader.get_output_file(), reader.get_species_names());
 
             write_header(reader);
             write_body(solver.get_state());
             writer.write_state(solver.get_state());
 
-            for (int i = 0; i < n_iters; i++) {
+            for (unsigned int i = 0; i < reader.get_number_iterations(); i++) {
                 solver.execute();
                 write_body(solver.get_state());
                 writer.write_state(solver.get_state());

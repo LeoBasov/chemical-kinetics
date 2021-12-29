@@ -23,12 +23,16 @@ class Reader {
 
     Species get_species() const;
     std::vector<Reaction> get_reactions() const;
+    unsigned int get_number_iterations() const;
+    std::string get_output_file() const;
 
    private:
     Species species_;
     std::vector<Reaction> reactions_;
     TimeStep time_step_;
     Thermal thermal_;
+    unsigned int number_iterations_ = 0;
+    std::string output_file_;
 };
 
 }  // namespace chem

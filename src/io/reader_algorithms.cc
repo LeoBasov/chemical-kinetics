@@ -3,6 +3,56 @@
 namespace chem {
 namespace reader_algorithms {
 
+std::string read_output_file_name(const std::string& file_name) {
+    std::ifstream infile(file_name);
+    std::string line;
+
+    if (!infile.is_open()) {
+        throw Exception("file does not exist", __PRETTY_FUNCTION__);
+    }
+
+    while (std::getline(infile, line)) {
+        std::istringstream iss(line);
+        std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
+                                         std::istream_iterator<std::string>());
+
+        if (results.size() && results.front() == "output_file") {
+            if (results.size() != 2) {
+                throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
+            } else {
+                return results.at(1);
+            }
+        }
+    }
+
+    throw Exception("output_file not found", __PRETTY_FUNCTION__);
+}
+
+unsigned int read_number_of_iterations(const std::string& file_name) {
+    std::ifstream infile(file_name);
+    std::string line;
+
+    if (!infile.is_open()) {
+        throw Exception("file does not exist", __PRETTY_FUNCTION__);
+    }
+
+    while (std::getline(infile, line)) {
+        std::istringstream iss(line);
+        std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
+                                         std::istream_iterator<std::string>());
+
+        if (results.size() && results.front() == "n_iterations") {
+            if (results.size() != 2) {
+                throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
+            }else{
+                return std::stoi(results.at(1));
+            }
+        }
+    }
+
+    throw Exception("n_iterations not found", __PRETTY_FUNCTION__);
+}
+
 Thermal read_temperature(const std::string& file_name) {
     Thermal thermal;
     std::ifstream infile(file_name);
@@ -73,7 +123,7 @@ TimeStep read_time_step(const std::string& file_name) {
     throw Exception("time_step not found", __PRETTY_FUNCTION__);
 }
 
-Species add_species(const std::string& file_name) {
+Species read_species(const std::string& file_name) {
     Species species;
     std::ifstream infile(file_name);
     std::string line;
@@ -106,7 +156,7 @@ Species add_species(const std::string& file_name) {
     return species;
 }
 
-std::vector<Reaction> add_reactions(const std::string& file_name, const std::vector<std::string>& species_names) {
+std::vector<Reaction> read_reactions(const std::string& file_name, const std::vector<std::string>& species_names) {
     std::vector<Reaction> reactions;
     std::ifstream infile(file_name);
     std::string line;
@@ -123,10 +173,10 @@ std::vector<Reaction> add_reactions(const std::string& file_name, const std::vec
         if (results.size() && results.front() == "add_reaction") {
             Reaction reaction(species_names.size());
 
-            add_products(results, reaction, species_names);
-            add_educts(results, reaction, species_names);
-            add_rate_constant(results, reaction);
-            add_enthalpy(results, reaction);
+            read_products(results, reaction, species_names);
+            read_educts(results, reaction, species_names);
+            read_rate_constant(results, reaction);
+            read_enthalpy(results, reaction);
 
             reactions.push_back(reaction);
         }
@@ -139,8 +189,8 @@ std::vector<Reaction> add_reactions(const std::string& file_name, const std::vec
     return reactions;
 }
 
-void add_products(const std::vector<std::string>& line, Reaction& reaction,
-                  const std::vector<std::string>& species_names) {
+void read_products(const std::vector<std::string>& line, Reaction& reaction,
+                   const std::vector<std::string>& species_names) {
     for (size_t i = 0; i < line.size(); i++) {
         if (line.at(i) == "products") {
             const unsigned int n_products(std::stoi(line.at(i + 1)));
@@ -165,8 +215,8 @@ void add_products(const std::vector<std::string>& line, Reaction& reaction,
     }
 }
 
-void add_educts(const std::vector<std::string>& line, Reaction& reaction,
-                const std::vector<std::string>& species_names) {
+void read_educts(const std::vector<std::string>& line, Reaction& reaction,
+                 const std::vector<std::string>& species_names) {
     for (size_t i = 0; i < line.size(); i++) {
         if (line.at(i) == "educts") {
             const unsigned int n_educts(std::stoi(line.at(i + 1)));
@@ -193,7 +243,7 @@ void add_educts(const std::vector<std::string>& line, Reaction& reaction,
     }
 }
 
-void add_enthalpy(const std::vector<std::string>& line, Reaction& reaction) {
+void read_enthalpy(const std::vector<std::string>& line, Reaction& reaction) {
     for (size_t i = 0; i < line.size(); i++) {
         if (line.at(i) == "reaction_enthalpy") {
             reaction.reaction_enthalpy = std::stod(line.at(i + 1));
@@ -201,7 +251,7 @@ void add_enthalpy(const std::vector<std::string>& line, Reaction& reaction) {
     }
 }
 
-void add_rate_constant(const std::vector<std::string>& line, Reaction& reaction) {
+void read_rate_constant(const std::vector<std::string>& line, Reaction& reaction) {
     for (size_t i = 0; i < line.size(); i++) {
         if (line.at(i) == "rate_constant") {
             if (line.at(i + 1) == "constant") {
