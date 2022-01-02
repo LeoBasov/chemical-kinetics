@@ -6,7 +6,7 @@
 using namespace chem;
 
 void set_up_solver(Solver& solver, const Reader& reader);
-void write_body(const uint current_iteration, const uint max_iter);
+void print_to_screen(const uint current_iteration, const uint max_iter);
 
 int main(int argc, char** argv) {
     Reader reader;
@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
 
             for (unsigned int i = 0; i < reader.get_number_iterations(); i++) {
                 solver.execute();
-                write_body(i, reader.get_number_iterations());
+                print_to_screen(i, reader.get_number_iterations());
                 writer.write_state(solver.get_state());
             }
         }
@@ -58,7 +58,7 @@ void set_up_solver(Solver& solver, const Reader& reader) {
     solver.set_thermal(reader.get_thermal());
 }
 
-void write_body(const uint current_iteration, const uint max_iter) {
+void print_to_screen(const uint current_iteration, const uint max_iter) {
     std::cout << "\r" << sc_print_algorithms::tab() << "ITERATION: " << current_iteration + 1 << "/" << max_iter;
 
     if (current_iteration + 1 >= max_iter) {
