@@ -88,5 +88,7 @@ std::string tab(const size_t& n) {
     return str;
 }
 
+std::string tab() { return tab(tab_size); }
+
 }  // namespace sc_print_algorithms
 }  // namespace chem

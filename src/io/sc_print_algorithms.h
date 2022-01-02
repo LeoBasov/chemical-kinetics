@@ -14,6 +14,7 @@ void print_reactions(const std::vector<Reaction>& reactions, const Species& spec
 void print_reaction(const Reaction& reaction, const Species& species);
 
 std::string tab(const size_t& n);
+std::string tab();
 
 }  // namespace sc_print_algorithms
 }  // namespace chem
