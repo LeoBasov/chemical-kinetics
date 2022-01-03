@@ -12,6 +12,7 @@ void Writer::open(const std::string& file_name, const std::vector<std::string>& 
     }
 
     stream_.precision(precision_);
+    stream_ << std::scientific;
 
     write_header(species_names);
 }
@@ -27,10 +28,10 @@ void Writer::write_header(const std::vector<std::string>& species_names) {
 }
 
 void Writer::write_state(const Solver::State& state) {
-    stream_ << state.time << std::scientific << "," << state.temperature << std::scientific;
+    stream_ << state.time << "," << state.temperature;
 
     for (long i = 0; i < state.concentrations.size(); i++) {
-        stream_ << "," << state.concentrations(i) << std::scientific;
+        stream_ << "," << state.concentrations(i);
     }
 
     stream_ << std::endl;
