@@ -76,10 +76,10 @@ jobs:
     steps:
       - set_up_production_test_environment
       - build_production
+      - run_production_tests
 
 workflows:
   build-and-run-tests:
     jobs:
       - unit_tests
       - production_tests
-      - run_production_tests
