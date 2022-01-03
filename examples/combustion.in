@@ -1,5 +1,5 @@
 output_file combustion.csv
-n_iterations 50
+n_iter 50
 time_step variable 0.1
 temperature constant 2000
 

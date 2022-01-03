@@ -41,7 +41,7 @@ unsigned int read_number_of_iterations(const std::string& file_name) {
         std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
                                          std::istream_iterator<std::string>());
 
-        if (results.size() && results.front() == "n_iterations") {
+        if (results.size() && results.front() == "n_iter") {
             if (results.size() != 2) {
                 throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
             }else{
@@ -50,7 +50,7 @@ unsigned int read_number_of_iterations(const std::string& file_name) {
         }
     }
 
-    throw Exception("n_iterations not found", __PRETTY_FUNCTION__);
+    throw Exception("number of iterations [n_iter] not found", __PRETTY_FUNCTION__);
 }
 
 Thermal read_temperature(const std::string& file_name) {

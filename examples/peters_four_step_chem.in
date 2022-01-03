@@ -2,7 +2,7 @@
 
 output_file four_step.csv
 
-n_iterations 500
+n_iter 500
 time_step variable 0.025
 temperature constant 2000
 

@@ -1,4 +1,4 @@
-n_iterations 100
+n_iter 100
 time_step constant 1e-7
 temperature constant 2000
 
