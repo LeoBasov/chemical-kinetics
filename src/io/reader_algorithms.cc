@@ -41,7 +41,7 @@ unsigned int read_number_of_iterations(const std::string& file_name) {
         std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
                                          std::istream_iterator<std::string>());
 
-        if (results.size() && results.front() == "n_iterations") {
+        if (results.size() && results.front() == "n_iter") {
             if (results.size() != 2) {
                 throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
             }else{
@@ -50,7 +50,7 @@ unsigned int read_number_of_iterations(const std::string& file_name) {
         }
     }
 
-    throw Exception("n_iterations not found", __PRETTY_FUNCTION__);
+    throw Exception("number of iterations [n_iter] not found", __PRETTY_FUNCTION__);
 }
 
 Thermal read_temperature(const std::string& file_name) {
@@ -67,14 +67,14 @@ Thermal read_temperature(const std::string& file_name) {
         std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
                                          std::istream_iterator<std::string>());
 
-        if (results.size() && results.front() == "temperature") {
+        if (results.size() && results.front() == "temp") {
             if (results.size() != 3) {
                 throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
             }
 
-            if (results.at(1) == "constant") {
+            if (results.at(1) == "const") {
                 thermal.set_type(Thermal::CONSTANT);
-            } else if (results.at(1) == "variable") {
+            } else if (results.at(1) == "var") {
                 thermal.set_type(Thermal::VARIABLE);
             } else {
                 throw Exception("wrong temperature step type [" + results.at(1) + "]", __PRETTY_FUNCTION__);
@@ -86,7 +86,7 @@ Thermal read_temperature(const std::string& file_name) {
         }
     }
 
-    throw Exception("temperature not found", __PRETTY_FUNCTION__);
+    throw Exception("temperature [temp] not found", __PRETTY_FUNCTION__);
 }
 
 TimeStep read_time_step(const std::string& file_name) {
@@ -103,14 +103,14 @@ TimeStep read_time_step(const std::string& file_name) {
         std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
                                          std::istream_iterator<std::string>());
 
-        if (results.size() && results.front() == "time_step") {
+        if (results.size() && results.front() == "dt") {
             if (results.size() != 3) {
                 throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
             }
 
-            if (results.at(1) == "constant") {
+            if (results.at(1) == "const") {
                 time_step.type = TimeStep::CONSTANT;
-            } else if (results.at(1) == "variable") {
+            } else if (results.at(1) == "var") {
                 time_step.type = TimeStep::VARIABLE;
             } else {
                 throw Exception("wrong time step type [" + results.at(1) + "]", __PRETTY_FUNCTION__);
@@ -122,7 +122,7 @@ TimeStep read_time_step(const std::string& file_name) {
         }
     }
 
-    throw Exception("time_step not found", __PRETTY_FUNCTION__);
+    throw Exception("time step [dt] not found", __PRETTY_FUNCTION__);
 }
 
 Species read_species(const std::string& file_name) {
@@ -139,7 +139,7 @@ Species read_species(const std::string& file_name) {
         std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
                                          std::istream_iterator<std::string>());
 
-        if (results.size() && results.front() == "add_species") {
+        if (results.size() && results.front() == "add_spec") {
             if (results.size() > 4 || results.size() < 2) {
                 throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
             }
@@ -176,7 +176,7 @@ std::vector<Reaction> read_reactions(const std::string& file_name, const std::ve
         std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
                                          std::istream_iterator<std::string>());
 
-        if (results.size() && results.front() == "add_reaction") {
+        if (results.size() && results.front() == "add_reac") {
             Reaction reaction(species_names.size());
 
             read_products(results, reaction, species_names);
@@ -198,7 +198,7 @@ std::vector<Reaction> read_reactions(const std::string& file_name, const std::ve
 void read_products(const std::vector<std::string>& line, Reaction& reaction,
                    const std::vector<std::string>& species_names) {
     for (size_t i = 0; i < line.size(); i++) {
-        if (line.at(i) == "products") {
+        if (line.at(i) == "prods") {
             const unsigned int n_products(std::stoi(line.at(i + 1)));
 
             for (size_t p = 2; p < n_products + 2; p++) {
@@ -251,23 +251,23 @@ void read_educts(const std::vector<std::string>& line, Reaction& reaction,
 
 void read_enthalpy(const std::vector<std::string>& line, Reaction& reaction) {
     for (size_t i = 0; i < line.size(); i++) {
-        if (line.at(i) == "reaction_enthalpy") {
+        if (line.at(i) == "dh") {
             reaction.reaction_enthalpy = std::stod(line.at(i + 1));
 
             return;
         }
     }
 
-    throw Exception("no reaction enthalpy defined", __PRETTY_FUNCTION__);
+    throw Exception("no reaction enthalpy [dh] defined", __PRETTY_FUNCTION__);
 }
 
 void read_rate_constant(const std::vector<std::string>& line, Reaction& reaction) {
     for (size_t i = 0; i < line.size(); i++) {
         if (line.at(i) == "rate_constant") {
-            if (line.at(i + 1) == "constant") {
+            if (line.at(i + 1) == "const") {
                 reaction.rate_constant.type = RateConstant::CONSTANT;
                 reaction.rate_constant.value = std::stod(line.at(i + 2));
-            } else if (line.at(i + 1) == "variable") {
+            } else if (line.at(i + 1) == "var") {
                 reaction.rate_constant.type = RateConstant::VARIABLE;
                 reaction.rate_constant.temperature_exponent = std::stod(line.at(i + 2));
                 reaction.rate_constant.pre_exp_factor = std::stod(line.at(i + 3));

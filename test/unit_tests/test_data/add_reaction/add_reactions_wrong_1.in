@@ -1,6 +1,6 @@
-add_species H2O 0.5
-add_species O2 1.3
-add_species H2 7.3
-add_species CO2 0.3
+add_spec H2O 0.5
+add_spec O2 1.3
+add_spec H2 7.3
+add_spec CO2 0.3
 
-add_reaction products 2.0*H2O^1 products 1.0*H3 2.0*CO2 rate_constant constant reaction_enthalpy 7.1
+add_reac prods 2.0*H2O^1 prods 1.0*H3 2.0*CO2 rate_constant const dh 7.1

@@ -2,18 +2,18 @@
 
 output_file four_step_var_T.csv
 
-n_iterations 500
-time_step variable 0.025
-temperature variable 2000
+n_iter 500
+dt var 0.025
+temp var 2000
 
-add_species CH4 1 1
-add_species O2  1 1
-add_species CO  0 1
-add_species H2  0 1
-add_species H2O 0 1
-add_species CO2 0 1
+add_spec CH4 1 1
+add_spec O2  1 1
+add_spec CO  0 1
+add_spec H2  0 1
+add_spec H2O 0 1
+add_spec CO2 0 1
 
-add_reaction educts 2 1*CH4^1 0.5*O2^1  products 2 1.0*CO  2.0*H2    rate_constant variable 0       9.66084e12  146440 reaction_enthalpy 1.0
-add_reaction educts 2 1*H2^1  0.5*O2^1  products 1 1.0*H2O           rate_constant variable -1.1682 1.428428e18 169222 reaction_enthalpy 0.0
-add_reaction educts 2 1*CO^1  0.5*O2^1  products 1 1.0*CO2           rate_constant variable 0       5.531351e14 170435 reaction_enthalpy 0.0
-add_reaction educts 2 1*CO^1  1.0*H2O^1 products 2 1.0*CO2 1.0*H2    rate_constant variable 0       1.791791e12 87215  reaction_enthalpy 0.0
+add_reac educts 2 1*CH4^1 0.5*O2^1  prods 2 1.0*CO  2.0*H2    rate_constant var 0       9.66084e12  146440 dh 1.0
+add_reac educts 2 1*H2^1  0.5*O2^1  prods 1 1.0*H2O           rate_constant var -1.1682 1.428428e18 169222 dh 0.0
+add_reac educts 2 1*CO^1  0.5*O2^1  prods 1 1.0*CO2           rate_constant var 0       5.531351e14 170435 dh 0.0
+add_reac educts 2 1*CO^1  1.0*H2O^1 prods 2 1.0*CO2 1.0*H2    rate_constant var 0       1.791791e12 87215  dh 0.0
