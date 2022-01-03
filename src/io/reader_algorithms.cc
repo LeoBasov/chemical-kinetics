@@ -176,7 +176,7 @@ std::vector<Reaction> read_reactions(const std::string& file_name, const std::ve
         std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
                                          std::istream_iterator<std::string>());
 
-        if (results.size() && results.front() == "add_reaction") {
+        if (results.size() && results.front() == "add_reac") {
             Reaction reaction(species_names.size());
 
             read_products(results, reaction, species_names);
