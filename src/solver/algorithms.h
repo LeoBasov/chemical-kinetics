@@ -19,6 +19,7 @@ double arrhenius(const double& temperature_exponent, const double& pre_exp_facto
 VectorXd calc_reaction_rates(const VectorXd& rate_constants, const VectorXd& concentrations,
                              const MatrixXd& reaction_powers);
 double calc_time_step(const VectorXd& concentrations, const VectorXd& dX_dt, const double& factor);
+double calc_total_heat_capcity(const VectorXd& concentrations, const VectorXd& heat_capacities);
 
 }  // namespace algorithms
 }  // namespace chem

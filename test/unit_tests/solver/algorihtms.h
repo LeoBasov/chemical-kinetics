@@ -99,4 +99,22 @@ TEST(algorithms, calc_time_step) {
     ASSERT_DOUBLE_EQ(0.1 * 0.25, result);
 }
 
+TEST(algorithm, calc_total_heat_capcity) {
+    Eigen::VectorXd heat_capacities(3);
+    Eigen::VectorXd concentration(3);
+
+    heat_capacities(0) = 1.0;
+    heat_capacities(1) = 2.0;
+    heat_capacities(2) = 3.0;
+
+    concentration(0) = 4.0;
+    concentration(1) = 5.0;
+    concentration(2) = 6.0;
+
+    const double result(algorithms::calc_total_heat_capcity(concentration, heat_capacities));
+    const double ref = (4.0 + 10 + 18) / (4 + 5 + 6);
+
+    ASSERT_DOUBLE_EQ(ref, result);
+}
+
 }  // namespace chem

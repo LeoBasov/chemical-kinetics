@@ -48,5 +48,9 @@ double calc_time_step(const VectorXd& concentrations, const VectorXd& dX_dt, con
     return factor * value;
 }
 
+double calc_total_heat_capcity(const VectorXd& concentrations, const VectorXd& heat_capacities) {
+    return concentrations.dot(heat_capacities) / concentrations.sum();
+}
+
 }  // namespace algorithms
 }  // namespace chem
