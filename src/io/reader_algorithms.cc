@@ -251,14 +251,14 @@ void read_educts(const std::vector<std::string>& line, Reaction& reaction,
 
 void read_enthalpy(const std::vector<std::string>& line, Reaction& reaction) {
     for (size_t i = 0; i < line.size(); i++) {
-        if (line.at(i) == "reaction_enthalpy") {
+        if (line.at(i) == "dh") {
             reaction.reaction_enthalpy = std::stod(line.at(i + 1));
 
             return;
         }
     }
 
-    throw Exception("no reaction enthalpy defined", __PRETTY_FUNCTION__);
+    throw Exception("no reaction enthalpy [dh] defined", __PRETTY_FUNCTION__);
 }
 
 void read_rate_constant(const std::vector<std::string>& line, Reaction& reaction) {
