@@ -51,6 +51,12 @@ commands:
       - run:
           name: Build Production
           command: 'mkdir build-production && cd build-production && cmake -DCMAKE_BUILD_TYPE=Release ../src/ && make'
+          
+  run_production_tests:
+    steps:
+      - run:
+          name: Run combustion test
+          command: ./build-production/chemical_kinetics /examples/combustion.in --test
 
 executors:
   docker-bionic:
@@ -76,3 +82,4 @@ workflows:
     jobs:
       - unit_tests
       - production_tests
+      - run_production_tests
