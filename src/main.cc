@@ -6,8 +6,7 @@
 using namespace chem;
 
 void set_up_solver(Solver& solver, const Reader& reader);
-void write_header(const Reader& reader);
-void write_body(const Solver::State& state);
+void print_to_screen(const uint current_iteration, const uint max_iter);
 
 int main(int argc, char** argv) {
     Reader reader;
@@ -23,23 +22,21 @@ int main(int argc, char** argv) {
 
             reader.read_file(file_name);
 
-            //---------------------------------------
             sc_print_algorithms::print_species(reader.get_species());
             sc_print_algorithms::print_reactions(reader.get_reactions(), reader.get_species());
-            //---------------------------------------
 
             set_up_solver(solver, reader);
             writer.open(reader.get_output_file(), reader.get_species_names());
 
-            write_header(reader);
-            write_body(solver.get_state());
             writer.write_state(solver.get_state());
 
             for (unsigned int i = 0; i < reader.get_number_iterations(); i++) {
                 solver.execute();
-                write_body(solver.get_state());
+                print_to_screen(i, reader.get_number_iterations());
                 writer.write_state(solver.get_state());
             }
+
+            sc_print_algorithms::print_state(reader.get_species_names(), solver.get_state());
         }
     } catch (Exception& e) {
         std::cout << "\"" << e.what() << "\" thrown in " << e.where() << std::endl;
@@ -61,24 +58,10 @@ void set_up_solver(Solver& solver, const Reader& reader) {
     solver.set_thermal(reader.get_thermal());
 }
 
-void write_header(const Reader& reader) {
-    std::cout << sc_print_algorithms::tab(sc_print_algorithms::tab_size);
-    std::cout << "t, T";
+void print_to_screen(const uint current_iteration, const uint max_iter) {
+    std::cout << "\r" << sc_print_algorithms::tab() << "iteration: " << current_iteration + 1 << "/" << max_iter;
 
-    for (const auto& name : reader.get_species_names()) {
-        std::cout << ", " << name;
+    if (current_iteration + 1 >= max_iter) {
+        std::cout << sc_print_algorithms::tab() << " : complete" << std::endl;
     }
-
-    std::cout << std::endl;
-}
-
-void write_body(const Solver::State& state) {
-    std::cout << sc_print_algorithms::tab(sc_print_algorithms::tab_size);
-    std::cout << std::to_string(state.time) << ", " << std::to_string(state.temperature);
-
-    for (long i = 0; i < state.concentrations.size(); i++) {
-        std::cout << ", " << std::to_string(state.concentrations(i));
-    }
-
-    std::cout << std::endl;
 }

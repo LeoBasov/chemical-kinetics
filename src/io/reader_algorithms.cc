@@ -259,8 +259,9 @@ void read_rate_constant(const std::vector<std::string>& line, Reaction& reaction
                 reaction.rate_constant.value = std::stod(line.at(i + 2));
             } else if (line.at(i + 1) == "variable") {
                 reaction.rate_constant.type = RateConstant::VARIABLE;
-                reaction.rate_constant.pre_exp_factor = std::stod(line.at(i + 2));
-                reaction.rate_constant.activation_energy = std::stod(line.at(i + 3));
+                reaction.rate_constant.temperature_exponent = std::stod(line.at(i + 2));
+                reaction.rate_constant.pre_exp_factor = std::stod(line.at(i + 3));
+                reaction.rate_constant.activation_energy = std::stod(line.at(i + 4));
             } else {
                 throw Exception("undefined rate constant type", __PRETTY_FUNCTION__);
             }

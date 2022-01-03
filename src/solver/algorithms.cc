@@ -3,8 +3,10 @@
 namespace chem {
 namespace algorithms {
 
-double arrhenius(const double& pre_exp_factor, const double& activation_energy, const double& temperature) {
-    return pre_exp_factor * std::exp(-activation_energy / (constants::R * temperature));
+double arrhenius(const double& temperature_exponent, const double& pre_exp_factor, const double& activation_energy,
+                 const double& temperature) {
+    return std::pow(temperature, temperature_exponent) * pre_exp_factor *
+           std::exp(-activation_energy / (constants::R * temperature));
 }
 
 VectorXd calc_reaction_rates(const VectorXd& rate_constants, const VectorXd& concentrations,
@@ -32,6 +34,10 @@ double calc_time_step(const VectorXd& concentrations, const VectorXd& dX_dt, con
     }
 
     for (long i = 0; i < concentrations.size(); i++) {
+        if (!concentrations(i) || !dX_dt(i)) {
+            continue;
+        }
+
         const double new_val(std::abs(concentrations(i) / dX_dt(i)));
 
         if (new_val < value && new_val > 0.0) {

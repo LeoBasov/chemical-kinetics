@@ -14,7 +14,8 @@ namespace algorithms {
 using namespace Eigen;
 
 // [activation_energy] = R⋅T
-double arrhenius(const double& pre_exp_factor, const double& activation_energy, const double& temperature);
+double arrhenius(const double& temperature_exponent, const double& pre_exp_factor, const double& activation_energy,
+                 const double& temperature);
 VectorXd calc_reaction_rates(const VectorXd& rate_constants, const VectorXd& concentrations,
                              const MatrixXd& reaction_powers);
 double calc_time_step(const VectorXd& concentrations, const VectorXd& dX_dt, const double& factor);

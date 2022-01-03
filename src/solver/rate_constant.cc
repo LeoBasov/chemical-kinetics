@@ -13,7 +13,7 @@ double RateConstant::get_rate_constant(const double& temperature) const {
             break;
         }
         case VARIABLE: {
-            rate_constant = algorithms::arrhenius(pre_exp_factor, activation_energy, temperature);
+            rate_constant = algorithms::arrhenius(temperature_exponent, pre_exp_factor, activation_energy, temperature);
             break;
         }
     }

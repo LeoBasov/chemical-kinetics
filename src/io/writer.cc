@@ -11,6 +11,9 @@ void Writer::open(const std::string& file_name, const std::vector<std::string>& 
         throw Exception("could not open or create file", __PRETTY_FUNCTION__);
     }
 
+    stream_.precision(precision_);
+    stream_ << std::scientific;
+
     write_header(species_names);
 }
 
@@ -25,10 +28,10 @@ void Writer::write_header(const std::vector<std::string>& species_names) {
 }
 
 void Writer::write_state(const Solver::State& state) {
-    stream_ << std::to_string(state.time) << "," << std::to_string(state.temperature);
+    stream_ << state.time << "," << state.temperature;
 
     for (long i = 0; i < state.concentrations.size(); i++) {
-        stream_ << "," << std::to_string(state.concentrations(i));
+        stream_ << "," << state.concentrations(i);
     }
 
     stream_ << std::endl;

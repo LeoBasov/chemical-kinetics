@@ -11,6 +11,7 @@ struct RateConstant {
 
     Type type = CONSTANT;
     double value = 0.0;
+    double temperature_exponent = 0.0;
     double pre_exp_factor = 0.0;
     double activation_energy = 0.0;
 
