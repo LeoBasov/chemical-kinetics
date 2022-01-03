@@ -52,5 +52,7 @@ double calc_total_heat_capcity(const VectorXd& concentrations, const VectorXd& h
     return concentrations.dot(heat_capacities) / concentrations.sum();
 }
 
+double calc_total_enthalpy_diff(const VectorXd& dX, const VectorXd& enthalpies) { return enthalpies.dot(dX); }
+
 }  // namespace algorithms
 }  // namespace chem

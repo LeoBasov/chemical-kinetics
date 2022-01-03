@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <gtest/gtest.h>
 
@@ -113,6 +113,24 @@ TEST(algorithm, calc_total_heat_capcity) {
 
     const double result(algorithms::calc_total_heat_capcity(concentration, heat_capacities));
     const double ref = (4.0 + 10 + 18) / (4 + 5 + 6);
+
+    ASSERT_DOUBLE_EQ(ref, result);
+}
+
+TEST(algorithm, calc_total_enthalpy_diff) {
+    Eigen::VectorXd dX(3);
+    Eigen::VectorXd enthalpies(3);
+
+    dX(0) = 1.0;
+    dX(1) = 2.0;
+    dX(2) = 3.0;
+
+    enthalpies(0) = 4.0;
+    enthalpies(1) = 5.0;
+    enthalpies(2) = 6.0;
+
+    const double result = algorithms::calc_total_enthalpy_diff(dX, enthalpies);
+    const double ref = 4.0 + 10.0 + 18.0;
 
     ASSERT_DOUBLE_EQ(ref, result);
 }

@@ -9,8 +9,9 @@ void Solver::execute() {
     const VectorXd reaction_rates =
         algorithms::calc_reaction_rates(rate_constants, state_.concentrations, reaction_powers_);
     const VectorXd dX_dt = stochiometric_matrix_ * reaction_rates;
+    const VectorXd dX = dX_dt * time_step_.calc_dt(state_.concentrations, dX_dt);
 
-    state_.concentrations += dX_dt * time_step_.calc_dt(state_.concentrations, dX_dt);
+    state_.concentrations += dX;
     state_.time += time_step_.get_last_dt();
     state_.temperature = thermal_.value;  // TODO: implement variable temperature
 }
