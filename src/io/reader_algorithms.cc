@@ -73,12 +73,14 @@ Thermal read_temperature(const std::string& file_name) {
             }
 
             if (results.at(1) == "constant") {
-                thermal.type = Thermal::CONSTANT;
+                thermal.set_type(Thermal::CONSTANT);
+            } else if (results.at(1) == "variable") {
+                thermal.set_type(Thermal::VARIABLE);
             } else {
                 throw Exception("wrong temperature step type [" + results.at(1) + "]", __PRETTY_FUNCTION__);
             }
 
-            thermal.value = std::stod(results.at(2));
+            thermal.set_temperature(std::stod(results.at(2)));
 
             return thermal;
         }
@@ -138,17 +140,21 @@ Species read_species(const std::string& file_name) {
                                          std::istream_iterator<std::string>());
 
         if (results.size() && results.front() == "add_species") {
-            if (results.size() && (results.size() - 1) % 2) {
+            if (results.size() > 4 || results.size() < 2) {
                 throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
             }
 
-            for (size_t i = 2; i < results.size(); i += 2) {
-                if (std::find(species.names.begin(), species.names.end(), results.at(i - 1)) != species.names.end()) {
-                    throw Exception("multiple definition of species", __PRETTY_FUNCTION__);
-                } else {
-                    species.names.push_back(results.at(i - 1));
-                    species.concentrations.push_back(std::stod(results.at(i)));
-                }
+            if (std::find(species.names.begin(), species.names.end(), results.at(1)) != species.names.end()) {
+                throw Exception("multiple definition of species", __PRETTY_FUNCTION__);
+            }
+
+            species.names.push_back(results.at(1));
+            species.concentrations.push_back(std::stod(results.at(2)));
+
+            if (results.size() == 4) {
+                species.heat_capacities.push_back(std::stod(results.at(3)));
+            } else {
+                species.heat_capacities.push_back(0.0);
             }
         }
     }
@@ -247,8 +253,12 @@ void read_enthalpy(const std::vector<std::string>& line, Reaction& reaction) {
     for (size_t i = 0; i < line.size(); i++) {
         if (line.at(i) == "reaction_enthalpy") {
             reaction.reaction_enthalpy = std::stod(line.at(i + 1));
+
+            return;
         }
     }
+
+    throw Exception("no reaction enthalpy defined", __PRETTY_FUNCTION__);
 }
 
 void read_rate_constant(const std::vector<std::string>& line, Reaction& reaction) {
@@ -265,8 +275,12 @@ void read_rate_constant(const std::vector<std::string>& line, Reaction& reaction
             } else {
                 throw Exception("undefined rate constant type", __PRETTY_FUNCTION__);
             }
+
+            return;
         }
     }
+
+    throw Exception("no rate constant defined", __PRETTY_FUNCTION__);
 }
 
 }  // namespace reader_algorithms

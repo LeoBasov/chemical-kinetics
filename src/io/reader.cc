@@ -48,6 +48,26 @@ MatrixXd Reader::get_stochiometric_matrix() const {
     return stochiometric_matrix;
 }
 
+VectorXd Reader::get_heat_capacities() const {
+    VectorXd heat_capacities(species_.heat_capacities.size());
+
+    for (long i = 0; i < heat_capacities.size(); i++) {
+        heat_capacities(i) = species_.heat_capacities.at(i);
+    }
+
+    return heat_capacities;
+}
+
+VectorXd Reader::get_enthalpies() const {
+    VectorXd enthalpies(reactions_.size());
+
+    for (long i = 0; i < enthalpies.size(); i++) {
+        enthalpies(i) = reactions_.at(i).reaction_enthalpy;
+    }
+
+    return enthalpies;
+}
+
 std::vector<RateConstant> Reader::get_rate_constants() const {
     std::vector<RateConstant> rate_constants(reactions_.size());
 

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <gtest/gtest.h>
 
@@ -97,6 +97,42 @@ TEST(algorithms, calc_time_step) {
     const double result(algorithms::calc_time_step(concentration, dX_dt, factor));
 
     ASSERT_DOUBLE_EQ(0.1 * 0.25, result);
+}
+
+TEST(algorithm, calc_total_heat_capcity) {
+    Eigen::VectorXd heat_capacities(3);
+    Eigen::VectorXd concentration(3);
+
+    heat_capacities(0) = 1.0;
+    heat_capacities(1) = 2.0;
+    heat_capacities(2) = 3.0;
+
+    concentration(0) = 4.0;
+    concentration(1) = 5.0;
+    concentration(2) = 6.0;
+
+    const double result(algorithms::calc_total_heat_capcity(concentration, heat_capacities));
+    const double ref = (4.0 + 10 + 18) / (4 + 5 + 6);
+
+    ASSERT_DOUBLE_EQ(ref, result);
+}
+
+TEST(algorithm, calc_total_enthalpy_diff) {
+    Eigen::VectorXd reaction_rate_dt(3);
+    Eigen::VectorXd enthalpies(3);
+
+    reaction_rate_dt(0) = 1.0;
+    reaction_rate_dt(1) = 2.0;
+    reaction_rate_dt(2) = 3.0;
+
+    enthalpies(0) = 4.0;
+    enthalpies(1) = 5.0;
+    enthalpies(2) = 6.0;
+
+    const double result = algorithms::calc_total_enthalpy_diff(reaction_rate_dt, enthalpies);
+    const double ref = 4.0 + 10.0 + 18.0;
+
+    ASSERT_DOUBLE_EQ(ref, result);
 }
 
 }  // namespace chem

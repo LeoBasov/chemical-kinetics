@@ -13,9 +13,10 @@ int main(int argc, char** argv) {
     Writer writer;
     Solver solver;
     std::string file_name;
+    size_t n_iter;
 
     try {
-        if (argc != 2) {
+        if (argc != 2 && argc != 3) {
             throw Exception("wrong argument count [" + std::to_string(argc) + "]", __PRETTY_FUNCTION__);
         } else {
             file_name = argv[1];
@@ -30,7 +31,15 @@ int main(int argc, char** argv) {
 
             writer.write_state(solver.get_state());
 
-            for (unsigned int i = 0; i < reader.get_number_iterations(); i++) {
+            if (argc == 3 && (std::string(argv[2]) == "--test" || std::string(argv[2]) == "-t")) {
+                n_iter = 1;
+            } else if (argc == 2) {
+                n_iter = reader.get_number_iterations();
+            } else {
+                throw Exception("undefined argument [" + std::string(argv[2]) + "]", __PRETTY_FUNCTION__);
+            }
+
+            for (unsigned int i = 0; i < n_iter; i++) {
                 solver.execute();
                 print_to_screen(i, reader.get_number_iterations());
                 writer.write_state(solver.get_state());
@@ -53,6 +62,8 @@ void set_up_solver(Solver& solver, const Reader& reader) {
     solver.set_concentrations(reader.get_concentrations());
     solver.set_reaction_powers(reader.get_reaction_powers());
     solver.set_stochiometric_matrix(reader.get_stochiometric_matrix());
+    solver.set_heat_capacities(reader.get_heat_capacities());
+    solver.set_enthalpies(reader.get_enthalpies());
     solver.set_rate_constants(reader.get_rate_constants());
     solver.set_time_step(reader.get_time_step());
     solver.set_thermal(reader.get_thermal());
