@@ -49,6 +49,12 @@ double calc_time_step(const VectorXd& concentrations, const VectorXd& dX_dt, con
 }
 
 double calc_total_heat_capcity(const VectorXd& concentrations, const VectorXd& heat_capacities) {
+    for (long i = 0; i < heat_capacities.size(); i++) {
+        if (heat_capacities(i) <= 0.0) {
+            throw Exception("wrong heat capacities", __PRETTY_FUNCTION__);
+        }
+    }
+
     return concentrations.dot(heat_capacities) / concentrations.sum();
 }
 

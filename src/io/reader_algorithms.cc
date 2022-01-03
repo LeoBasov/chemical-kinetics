@@ -74,6 +74,8 @@ Thermal read_temperature(const std::string& file_name) {
 
             if (results.at(1) == "constant") {
                 thermal.set_type(Thermal::CONSTANT);
+            } else if (results.at(1) == "variable") {
+                thermal.set_type(Thermal::VARIABLE);
             } else {
                 throw Exception("wrong temperature step type [" + results.at(1) + "]", __PRETTY_FUNCTION__);
             }
