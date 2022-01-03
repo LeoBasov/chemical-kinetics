@@ -56,7 +56,7 @@ commands:
     steps:
       - run:
           name: Run combustion test
-          command: ./build-production/chemical_kinetics /examples/combustion.in --test
+          command: ./build-production/chemical_kinetics ./examples/combustion.in --test
 
 executors:
   docker-bionic:
