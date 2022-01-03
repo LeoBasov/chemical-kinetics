@@ -19,6 +19,18 @@ namespace reader_algorithms {
 struct Species {
     std::vector<std::string> names;
     std::vector<double> concentrations;
+
+    size_t get_max_name_size() const {
+        size_t max_name_l(0);
+
+        for (const auto& name : names) {
+            if (name.size() > max_name_l) {
+                max_name_l = name.size();
+            }
+        }
+
+        return max_name_l;
+    }
 };
 
 struct Reaction {

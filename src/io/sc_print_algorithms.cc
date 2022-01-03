@@ -35,38 +35,41 @@ void print_reactions(const std::vector<Reaction>& reactions, const Species& spec
 }
 
 void print_reaction(const Reaction& reaction, const Species& species) {
-    bool skipped(false);
+    bool first(true);
+    size_t max_name_l(species.get_max_name_size());
 
     std::cout << tab(tab_size) << "reaction: ";
+    std::cout.precision(1);
 
     for (size_t i = 0; i < reaction.educt_stoichiometric_coefficients.size(); i++) {
         if (!reaction.educt_stoichiometric_coefficients.at(i)) {
-            skipped = true;
             continue;
         }
 
-        if (i && !skipped) {
+        if (i && !first) {
             std::cout << " + ";
         }
 
-        std::cout << reaction.educt_stoichiometric_coefficients.at(i) << "⋅" << species.names.at(i);
-        skipped = false;
+        std::cout << std::scientific << reaction.educt_stoichiometric_coefficients.at(i) << "⋅" << species.names.at(i)
+                  << tab(max_name_l - species.names.at(i).size());
+        first = false;
     }
 
+    first = true;
     std::cout << " →  ";
 
     for (size_t i = 0; i < reaction.product_stoichiometric_coefficients.size(); i++) {
         if (!reaction.product_stoichiometric_coefficients.at(i)) {
-            skipped = true;
             continue;
         }
 
-        if (i && !skipped) {
+        if (i && !first) {
             std::cout << " + ";
         }
 
-        std::cout << reaction.product_stoichiometric_coefficients.at(i) << "⋅" << species.names.at(i);
-        skipped = false;
+        std::cout << reaction.product_stoichiometric_coefficients.at(i) << "⋅" << species.names.at(i)
+                  << tab(max_name_l - species.names.at(i).size());
+        first = false;
     }
 
     if (reaction.rate_constant.type == RateConstant::CONSTANT) {
