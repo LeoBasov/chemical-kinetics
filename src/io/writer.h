@@ -18,6 +18,7 @@ class Writer {
 
    private:
     std::ofstream stream_;
+    const long precision_ = 3;
 
     void write_header(const std::vector<std::string> &species_names);
 };
