@@ -78,7 +78,7 @@ Thermal read_temperature(const std::string& file_name) {
                 throw Exception("wrong temperature step type [" + results.at(1) + "]", __PRETTY_FUNCTION__);
             }
 
-            thermal.value = std::stod(results.at(2));
+            thermal.temperature = std::stod(results.at(2));
 
             return thermal;
         }

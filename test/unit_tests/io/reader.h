@@ -34,7 +34,7 @@ TEST(Reader, get_thermal) {
     thermal = reader.get_thermal();
 
     ASSERT_EQ(Thermal::CONSTANT, thermal.type);
-    ASSERT_DOUBLE_EQ(2000, thermal.value);
+    ASSERT_DOUBLE_EQ(2000, thermal.temperature);
 }
 
 TEST(Reader, get_species_name) {

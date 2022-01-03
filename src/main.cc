@@ -53,6 +53,8 @@ void set_up_solver(Solver& solver, const Reader& reader) {
     solver.set_concentrations(reader.get_concentrations());
     solver.set_reaction_powers(reader.get_reaction_powers());
     solver.set_stochiometric_matrix(reader.get_stochiometric_matrix());
+    solver.set_heat_capacities(reader.get_heat_capacities());
+    solver.set_enthalpies(reader.get_enthalpies());
     solver.set_rate_constants(reader.get_rate_constants());
     solver.set_time_step(reader.get_time_step());
     solver.set_thermal(reader.get_thermal());

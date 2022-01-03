@@ -33,7 +33,7 @@ TEST(Solver, all) {
     rate_constants.at(0).value = 1;
 
     thermal.type = Thermal::CONSTANT;
-    thermal.value = 2000;
+    thermal.temperature = 2000;
 
     solver.set_concentrations(concentrations);
     solver.set_reaction_powers(reaction_powers);
