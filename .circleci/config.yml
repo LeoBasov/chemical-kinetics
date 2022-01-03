@@ -57,6 +57,15 @@ commands:
       - run:
           name: Run combustion test
           command: ./build-production/chemical_kinetics ./examples/combustion.in --test
+      - run:
+          name: Run virus test
+          command: ./build-production/chemical_kinetics ./examples/virus.in --test
+      - run:
+          name: Run peters_four_step_chem test
+          command: ./build-production/chemical_kinetics ./examples/peters_four_step_chem.in --test
+      - run:
+          name: Run peters_four_step_chem_var_T test
+          command: ./build-production/chemical_kinetics ./examples/peters_four_step_chem_var_T.in --test
 
 executors:
   docker-bionic:
