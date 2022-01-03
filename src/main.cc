@@ -22,10 +22,8 @@ int main(int argc, char** argv) {
 
             reader.read_file(file_name);
 
-            //---------------------------------------
             sc_print_algorithms::print_species(reader.get_species());
             sc_print_algorithms::print_reactions(reader.get_reactions(), reader.get_species());
-            //---------------------------------------
 
             set_up_solver(solver, reader);
             writer.open(reader.get_output_file(), reader.get_species_names());
@@ -37,6 +35,8 @@ int main(int argc, char** argv) {
                 print_to_screen(i, reader.get_number_iterations());
                 writer.write_state(solver.get_state());
             }
+
+            sc_print_algorithms::print_state(reader.get_species_names(), solver.get_state());
         }
     } catch (Exception& e) {
         std::cout << "\"" << e.what() << "\" thrown in " << e.where() << std::endl;
@@ -59,10 +59,9 @@ void set_up_solver(Solver& solver, const Reader& reader) {
 }
 
 void print_to_screen(const uint current_iteration, const uint max_iter) {
-    std::cout << "\r" << sc_print_algorithms::tab() << "ITERATION: " << current_iteration + 1 << "/" << max_iter;
+    std::cout << "\r" << sc_print_algorithms::tab() << "iteration: " << current_iteration + 1 << "/" << max_iter;
 
     if (current_iteration + 1 >= max_iter) {
-        std::cout << std::endl;
-        std::cout << sc_print_algorithms::tab() << "COMPLETE" << std::endl;
+        std::cout << sc_print_algorithms::tab() << " : complete" << std::endl;
     }
 }

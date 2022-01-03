@@ -93,6 +93,30 @@ void print_reaction(const Reaction& reaction, const Species& species, const size
     std::cout << std::endl;
 }
 
+void print_state(const std::vector<std::string>& species_names, const Solver::State& state) {
+    const size_t n_name(7);
+    const size_t n_concentration(13);
+
+    std::cout << std::endl;
+    std::cout << tab(tab_size) << "╔═════════╤═══════════════╗" << std::endl;
+    std::cout << tab(tab_size) << "║ species │ concentration ║" << std::endl;
+    std::cout << tab(tab_size) << "╠═════════╪═══════════════╣" << std::endl;
+
+    for (size_t i = 0; i < species_names.size(); i++) {
+        const size_t n_name_loc(n_name - species_names.at(i).size());
+        const size_t n_concentration_loc(n_concentration - std::to_string(state.concentrations(i)).size());
+
+        if (i) {
+            std::cout << tab(tab_size) << "╟─────────┼───────────────╢" << std::endl;
+        }
+
+        std::cout << tab(tab_size) << "║ " << tab(n_name_loc) << species_names.at(i) << " │ "
+                  << tab(n_concentration_loc) << std::to_string(state.concentrations(i)) << " ║" << std::endl;
+    }
+
+    std::cout << tab(tab_size) << "╚═════════╧═══════════════╝" << std::endl << std::endl;
+}
+
 size_t get_max_name_size(const Species& species) {
     size_t max_name_l(0);
 

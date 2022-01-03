@@ -13,6 +13,7 @@ void print_species(const Species& species);
 void print_reactions(const std::vector<Reaction>& reactions, const Species& species);
 void print_reaction(const Reaction& reaction, const Species& species, const size_t& max_educt_size,
                     const size_t& max_product_size);
+void print_state(const std::vector<std::string>& species_names, const Solver::State& state);
 
 size_t get_max_name_size(const Species& species);
 size_t get_max_educt_size(const std::vector<Reaction>& reactions);
