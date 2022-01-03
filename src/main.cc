@@ -13,9 +13,10 @@ int main(int argc, char** argv) {
     Writer writer;
     Solver solver;
     std::string file_name;
+    size_t n_iter;
 
     try {
-        if (argc != 2) {
+        if (argc != 2 && argc != 3) {
             throw Exception("wrong argument count [" + std::to_string(argc) + "]", __PRETTY_FUNCTION__);
         } else {
             file_name = argv[1];
@@ -30,7 +31,15 @@ int main(int argc, char** argv) {
 
             writer.write_state(solver.get_state());
 
-            for (unsigned int i = 0; i < reader.get_number_iterations(); i++) {
+            if (argc == 3 && (std::string(argv[2]) == "--test" || std::string(argv[2]) == "-t")) {
+                n_iter = 1;
+            } else if (argc == 2) {
+                n_iter = reader.get_number_iterations();
+            } else {
+                throw Exception("undefined argument [" + std::string(argv[2]) + "]", __PRETTY_FUNCTION__);
+            }
+
+            for (unsigned int i = 0; i < n_iter; i++) {
                 solver.execute();
                 print_to_screen(i, reader.get_number_iterations());
                 writer.write_state(solver.get_state());
