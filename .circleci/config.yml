@@ -35,6 +35,37 @@ commands:
             genhtml ./build-tests/coverage-filtered.info --output-directory coverage
       - store_artifacts:
           path: coverage
+          
+  set_up_production_test_environment:
+    steps:
+      - checkout
+      - run:
+          name: Installing SUDO
+          command: 'apt-get update && apt install -y sudo && rm -rf /var/lib/apt/lists/*'
+      - run:
+          name: Run SETUP
+          command: bash setup.sh
+          
+  build_production:
+    steps:
+      - run:
+          name: Build Production
+          command: 'mkdir build-production && cd build-production && cmake -DCMAKE_BUILD_TYPE=Release ../src/ && make'
+          
+  run_production_tests:
+    steps:
+      - run:
+          name: Run combustion test
+          command: ./build-production/chemical_kinetics ./examples/combustion.in --test
+      - run:
+          name: Run virus test
+          command: ./build-production/chemical_kinetics ./examples/virus.in --test
+      - run:
+          name: Run peters_four_step_chem test
+          command: ./build-production/chemical_kinetics ./examples/peters_four_step_chem.in --test
+      - run:
+          name: Run peters_four_step_chem_var_T test
+          command: ./build-production/chemical_kinetics ./examples/peters_four_step_chem_var_T.in --test
 
 executors:
   docker-bionic:
@@ -49,7 +80,15 @@ jobs:
       - build_tests
       - run_unit_tests
 
+  production_tests:
+    executor: docker-bionic
+    steps:
+      - set_up_production_test_environment
+      - build_production
+      - run_production_tests
+
 workflows:
   build-and-run-tests:
     jobs:
       - unit_tests
+      - production_tests
