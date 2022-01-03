@@ -68,11 +68,11 @@ TEST(Writer, write_state) {
 
     ASSERT_EQ(5, result.size());
 
-    ASSERT_EQ("1.313e+01", result.at(0));
-    ASSERT_EQ("1.110e+01", result.at(1));
-    ASSERT_EQ("3.300e+00", result.at(2));
-    ASSERT_EQ("5.500e+00", result.at(3));
-    ASSERT_EQ("7.700e+00", result.at(4));
+    ASSERT_EQ("1.313000e+01", result.at(0));
+    ASSERT_EQ("1.110000e+01", result.at(1));
+    ASSERT_EQ("3.300000e+00", result.at(2));
+    ASSERT_EQ("5.500000e+00", result.at(3));
+    ASSERT_EQ("7.700000e+00", result.at(4));
 }
 
 }  // namespace chem
