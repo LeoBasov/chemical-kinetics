@@ -1,2 +1,3 @@
 add_species H2O 0.5
-add_species O2 1.3 O2 1.7
+add_species O2 1.3
+add_species O2 1.7

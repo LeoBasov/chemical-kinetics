@@ -19,6 +19,7 @@ namespace reader_algorithms {
 struct Species {
     std::vector<std::string> names;
     std::vector<double> concentrations;
+    std::vector<double> heat_capacities;
 };
 
 struct Reaction {

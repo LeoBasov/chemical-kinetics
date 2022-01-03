@@ -138,17 +138,21 @@ Species read_species(const std::string& file_name) {
                                          std::istream_iterator<std::string>());
 
         if (results.size() && results.front() == "add_species") {
-            if (results.size() && (results.size() - 1) % 2) {
+            if (results.size() > 4 || results.size() < 2) {
                 throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
             }
 
-            for (size_t i = 2; i < results.size(); i += 2) {
-                if (std::find(species.names.begin(), species.names.end(), results.at(i - 1)) != species.names.end()) {
-                    throw Exception("multiple definition of species", __PRETTY_FUNCTION__);
-                } else {
-                    species.names.push_back(results.at(i - 1));
-                    species.concentrations.push_back(std::stod(results.at(i)));
-                }
+            if (std::find(species.names.begin(), species.names.end(), results.at(1)) != species.names.end()) {
+                throw Exception("multiple definition of species", __PRETTY_FUNCTION__);
+            }
+
+            species.names.push_back(results.at(1));
+            species.concentrations.push_back(std::stod(results.at(2)));
+
+            if (results.size() == 4) {
+                species.heat_capacities.push_back(std::stod(results.at(3)));
+            } else {
+                species.heat_capacities.push_back(0.0);
             }
         }
     }
