@@ -198,7 +198,7 @@ std::vector<Reaction> read_reactions(const std::string& file_name, const std::ve
 void read_products(const std::vector<std::string>& line, Reaction& reaction,
                    const std::vector<std::string>& species_names) {
     for (size_t i = 0; i < line.size(); i++) {
-        if (line.at(i) == "products") {
+        if (line.at(i) == "prods") {
             const unsigned int n_products(std::stoi(line.at(i + 1)));
 
             for (size_t p = 2; p < n_products + 2; p++) {
