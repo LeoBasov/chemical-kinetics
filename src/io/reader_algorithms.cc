@@ -264,10 +264,10 @@ void read_enthalpy(const std::vector<std::string>& line, Reaction& reaction) {
 void read_rate_constant(const std::vector<std::string>& line, Reaction& reaction) {
     for (size_t i = 0; i < line.size(); i++) {
         if (line.at(i) == "rate_constant") {
-            if (line.at(i + 1) == "constant") {
+            if (line.at(i + 1) == "const") {
                 reaction.rate_constant.type = RateConstant::CONSTANT;
                 reaction.rate_constant.value = std::stod(line.at(i + 2));
-            } else if (line.at(i + 1) == "variable") {
+            } else if (line.at(i + 1) == "var") {
                 reaction.rate_constant.type = RateConstant::VARIABLE;
                 reaction.rate_constant.temperature_exponent = std::stod(line.at(i + 2));
                 reaction.rate_constant.pre_exp_factor = std::stod(line.at(i + 3));
