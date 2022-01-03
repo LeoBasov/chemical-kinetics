@@ -73,12 +73,12 @@ Thermal read_temperature(const std::string& file_name) {
             }
 
             if (results.at(1) == "constant") {
-                thermal.type = Thermal::CONSTANT;
+                thermal.set_type(Thermal::CONSTANT);
             } else {
                 throw Exception("wrong temperature step type [" + results.at(1) + "]", __PRETTY_FUNCTION__);
             }
 
-            thermal.temperature = std::stod(results.at(2));
+            thermal.set_temperature(std::stod(results.at(2)));
 
             return thermal;
         }

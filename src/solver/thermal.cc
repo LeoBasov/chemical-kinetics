@@ -4,9 +4,13 @@ namespace chem {
 
 Thermal::Thermal() {}
 
+void Thermal::set_type(Type type) { type_ = type; }
+
+void Thermal::set_temperature(const double& temperature) { temperature_ = temperature; }
+
 double Thermal::calc_temperature(const VectorXd& concentrations, const VectorXd& heat_capacities, const VectorXd& dX,
                                  const VectorXd& enthalpies) {
-    switch (type) {
+    switch (type_) {
         case CONSTANT: {
             break;
         }
@@ -14,7 +18,7 @@ double Thermal::calc_temperature(const VectorXd& concentrations, const VectorXd&
             const double heat_capacity = algorithms::calc_total_heat_capcity(concentrations, heat_capacities);
             const double enthalpy = algorithms::calc_total_enthalpy_diff(dX, enthalpies);
 
-            temperature += enthalpy / heat_capacity;
+            temperature_ += enthalpy / heat_capacity;
 
             break;
         }
@@ -22,9 +26,11 @@ double Thermal::calc_temperature(const VectorXd& concentrations, const VectorXd&
             throw Exception("undefined case", __PRETTY_FUNCTION__);
     }
 
-    return temperature;
+    return temperature_;
 }
 
-double Thermal::get_last_temperature() const { return temperature; }
+double Thermal::get_temperature() const { return temperature_; }
+
+Thermal::Type Thermal::get_type() const { return type_; }
 
 }  // namespace chem
