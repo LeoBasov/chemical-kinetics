@@ -8,7 +8,7 @@ add_spec sick 0.02
 add_spec immune 0.0
 add_spec dead 0.0
 
-add_reaction educts 2 1.0*heathly^1 0.0*sick^1 products 1 1.0*sick rate_constant constant 0.2 reaction_enthalpy 0.0
-add_reaction educts 1 1.0*sick^1 products 1 1.0*immune rate_constant constant 0.03 reaction_enthalpy 0.0
-add_reaction educts 1 1.0*immune^1 products 1 1.0*heathly rate_constant constant 0.005277 reaction_enthalpy 0.0
-add_reaction educts 1 1.0*sick^1 products 1 1.0*dead rate_constant constant 0.000277 reaction_enthalpy 0.0
+add_reac educts 2 1.0*heathly^1 0.0*sick^1 products 1 1.0*sick rate_constant constant 0.2 reaction_enthalpy 0.0
+add_reac educts 1 1.0*sick^1 products 1 1.0*immune rate_constant constant 0.03 reaction_enthalpy 0.0
+add_reac educts 1 1.0*immune^1 products 1 1.0*heathly rate_constant constant 0.005277 reaction_enthalpy 0.0
+add_reac educts 1 1.0*sick^1 products 1 1.0*dead rate_constant constant 0.000277 reaction_enthalpy 0.0
