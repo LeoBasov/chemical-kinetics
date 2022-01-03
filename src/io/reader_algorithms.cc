@@ -67,14 +67,14 @@ Thermal read_temperature(const std::string& file_name) {
         std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
                                          std::istream_iterator<std::string>());
 
-        if (results.size() && results.front() == "temperature") {
+        if (results.size() && results.front() == "temp") {
             if (results.size() != 3) {
                 throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
             }
 
-            if (results.at(1) == "constant") {
+            if (results.at(1) == "const") {
                 thermal.set_type(Thermal::CONSTANT);
-            } else if (results.at(1) == "variable") {
+            } else if (results.at(1) == "var") {
                 thermal.set_type(Thermal::VARIABLE);
             } else {
                 throw Exception("wrong temperature step type [" + results.at(1) + "]", __PRETTY_FUNCTION__);
@@ -86,7 +86,7 @@ Thermal read_temperature(const std::string& file_name) {
         }
     }
 
-    throw Exception("temperature not found", __PRETTY_FUNCTION__);
+    throw Exception("temperature [temp] not found", __PRETTY_FUNCTION__);
 }
 
 TimeStep read_time_step(const std::string& file_name) {
@@ -103,14 +103,14 @@ TimeStep read_time_step(const std::string& file_name) {
         std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
                                          std::istream_iterator<std::string>());
 
-        if (results.size() && results.front() == "time_step") {
+        if (results.size() && results.front() == "dt") {
             if (results.size() != 3) {
                 throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
             }
 
-            if (results.at(1) == "constant") {
+            if (results.at(1) == "const") {
                 time_step.type = TimeStep::CONSTANT;
-            } else if (results.at(1) == "variable") {
+            } else if (results.at(1) == "var") {
                 time_step.type = TimeStep::VARIABLE;
             } else {
                 throw Exception("wrong time step type [" + results.at(1) + "]", __PRETTY_FUNCTION__);
@@ -122,7 +122,7 @@ TimeStep read_time_step(const std::string& file_name) {
         }
     }
 
-    throw Exception("time_step not found", __PRETTY_FUNCTION__);
+    throw Exception("time step [dt] not found", __PRETTY_FUNCTION__);
 }
 
 Species read_species(const std::string& file_name) {
@@ -139,7 +139,7 @@ Species read_species(const std::string& file_name) {
         std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
                                          std::istream_iterator<std::string>());
 
-        if (results.size() && results.front() == "add_species") {
+        if (results.size() && results.front() == "add_spec") {
             if (results.size() > 4 || results.size() < 2) {
                 throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
             }
