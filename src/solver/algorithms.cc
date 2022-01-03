@@ -34,6 +34,10 @@ double calc_time_step(const VectorXd& concentrations, const VectorXd& dX_dt, con
     }
 
     for (long i = 0; i < concentrations.size(); i++) {
+        if (!concentrations(i) || !dX_dt(i)) {
+            continue;
+        }
+
         const double new_val(std::abs(concentrations(i) / dX_dt(i)));
 
         if (new_val < value && new_val > 0.0) {
