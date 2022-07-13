@@ -13,6 +13,8 @@ class Reader {
 
     void read_file(const std::string& file_name);
 
+    Solver::Type get_solver_type() const;
+
     VectorXd get_concentrations() const;
     MatrixXd get_reaction_powers() const;
     MatrixXd get_stochiometric_matrix() const;
@@ -29,6 +31,7 @@ class Reader {
     std::string get_output_file() const;
 
    private:
+    Solver::Type solver_type_ = Solver::MASTER_EQUATION;
     Species species_;
     std::vector<Reaction> reactions_;
     TimeStep time_step_;

@@ -59,6 +59,7 @@ int main(int argc, char** argv) {
 }
 
 void set_up_solver(Solver& solver, const Reader& reader) {
+    solver.set_solver_type(reader.get_solver_type());
     solver.set_concentrations(reader.get_concentrations());
     solver.set_reaction_powers(reader.get_reaction_powers());
     solver.set_stochiometric_matrix(reader.get_stochiometric_matrix());

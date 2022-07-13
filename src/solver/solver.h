@@ -10,6 +10,8 @@ using namespace Eigen;
 
 class Solver {
    public:
+    enum Type { MASTER_EQUATION, FOKKER_PLANCK };
+
     struct State {
         VectorXd concentrations;
         double time = 0.0;
@@ -23,6 +25,7 @@ class Solver {
     void execute();
     State get_state() const;
 
+    void set_solver_type(const Type& type);
     void set_concentrations(const VectorXd& concentrations);
     void set_reaction_powers(const MatrixXd& reaction_powers);
     void set_stochiometric_matrix(const MatrixXd& stochiometric_matrix);
@@ -33,6 +36,7 @@ class Solver {
     void set_thermal(const Thermal& thermal);
 
    private:
+    Type type_;
     State state_;
     MatrixXd reaction_powers_;
     MatrixXd stochiometric_matrix_;
@@ -43,5 +47,8 @@ class Solver {
     Thermal thermal_;
 
     VectorXd calc_rate_constants() const;
+
+    void execute_master_equation();
+    void execute_fokker_planck();
 };
 }  // namespace chem

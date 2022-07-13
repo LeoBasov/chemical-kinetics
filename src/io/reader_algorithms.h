@@ -9,6 +9,7 @@
 
 #include "../exception/exception.h"
 #include "../solver/rate_constant.h"
+#include "../solver/solver.h"
 #include "../solver/thermal.h"
 #include "../solver/timestep.h"
 #include "../utilities/utility.h"
@@ -39,6 +40,7 @@ struct Reaction {
     }
 };
 
+Solver::Type read_solver_type(const std::string& file_name);
 std::string read_output_file_name(const std::string& file_name);
 unsigned int read_number_of_iterations(const std::string& file_name);
 Thermal read_temperature(const std::string& file_name);

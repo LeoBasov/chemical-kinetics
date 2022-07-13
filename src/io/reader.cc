@@ -5,6 +5,7 @@ namespace chem {
 Reader::Reader() {}
 
 void Reader::read_file(const std::string& file_name) {
+    solver_type_ = read_solver_type(file_name);
     species_ = read_species(file_name);
     reactions_ = read_reactions(file_name, species_.names);
     time_step_ = read_time_step(file_name);
@@ -12,6 +13,8 @@ void Reader::read_file(const std::string& file_name) {
     number_iterations_ = read_number_of_iterations(file_name);
     output_file_ = read_output_file_name(file_name);
 }
+
+Solver::Type Reader::get_solver_type() const { return solver_type_; }
 
 VectorXd Reader::get_concentrations() const {
     VectorXd concentrations(species_.concentrations.size());

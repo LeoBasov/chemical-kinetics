@@ -3,6 +3,37 @@
 namespace chem {
 namespace reader_algorithms {
 
+Solver::Type read_solver_type(const std::string& file_name) {
+    std::ifstream infile(file_name);
+    std::string line;
+
+    if (!infile.is_open()) {
+        throw Exception("file does not exist", __PRETTY_FUNCTION__);
+    }
+
+    while (std::getline(infile, line)) {
+        std::istringstream iss(line);
+        std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
+                                         std::istream_iterator<std::string>());
+
+        if (results.size() && results.front() == "solver_type") {
+            if (results.size() != 2) {
+                throw Exception("wrong number of arguments", __PRETTY_FUNCTION__);
+            } else {
+                if (results.at(1) == "fokker_planck") {
+                    return Solver::FOKKER_PLANCK;
+                } else if (results.at(1) == "master_equation") {
+                    return Solver::MASTER_EQUATION;
+                } else {
+                    throw Exception("undefined solver_type", __PRETTY_FUNCTION__);
+                }
+            }
+        }
+    }
+
+    return Solver::MASTER_EQUATION;
+}
+
 std::string read_output_file_name(const std::string& file_name) {
     std::ifstream infile(file_name);
     std::string line;
