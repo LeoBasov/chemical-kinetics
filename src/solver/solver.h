@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../utilities/random.h"
 #include "algorithms.h"
 #include "rate_constant.h"
 #include "thermal.h"
@@ -45,6 +46,7 @@ class Solver {
     TimeStep time_step_;
     std::vector<RateConstant> rate_constants_;
     Thermal thermal_;
+    Random random_;
 
     VectorXd calc_rate_constants() const;
 

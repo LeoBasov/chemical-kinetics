@@ -67,6 +67,24 @@ void Solver::execute_master_equation() {
     state_.time += time_step_.get_last_dt();
 }
 
-void Solver::execute_fokker_planck() { throw Exception("execute_fokker_planck not implemented", __PRETTY_FUNCTION__); }
+void Solver::execute_fokker_planck() {
+    const VectorXd rate_constants = calc_rate_constants();
+    const VectorXd reaction_rates =
+        algorithms::calc_reaction_rates(rate_constants, state_.concentrations, reaction_powers_);
+    const VectorXd A = stochiometric_matrix_ * reaction_rates;
+    const VectorXd D_pre = stochiometric_matrix_.transpose() * stochiometric_matrix_;
+    const VectorXd D = D_pre * reaction_rates;
+
+    for (uint i = 0; i < A.rows(); i++) {
+        const double r = random_.NormalRandomNumber();
+        state_.concentrations(i) = exp(A(i) * time_step_.calc_dt(state_.concentrations, A)) * state_.concentrations(i) -
+                                   sqrt(D(0) * (1 - exp(A(i) * time_step_.get_last_dt()))) * r;
+        state_.concentrations(i) = std::max(0.0, state_.concentrations(i));
+    }
+
+    state_.temperature = thermal_.calc_temperature(state_.concentrations, heat_capacities_,
+                                                   reaction_rates * time_step_.get_last_dt(), enthalpies_);
+    state_.time += time_step_.get_last_dt();
+}
 
 }  // namespace chem
