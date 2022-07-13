@@ -9,6 +9,6 @@ find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 find_package(OpenMP REQUIRED)
 
 include_directories(${EIGEN3_INCLUDE_DIRS})
-file(GLOB_RECURSE sources *.cc)
+file(GLOB_RECURSE sources *.cc *.h)
 add_executable(chemical_kinetics ${sources})
 target_link_libraries(chemical_kinetics ${EIGEN3_LIBRARIES} OpenMP::OpenMP_CXX)
